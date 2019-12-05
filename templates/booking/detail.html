@@ -1,0 +1,1005 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> {{ artistProfile.exp_name }} - Haystome </title>
+    <meta name="description" content="{{ artistProfile.description }}"/>
+    <link rel="canonical" href="http://haystome.com/booking/detail/{{ artistProfile.slug }}/" />
+    <meta property="og:url" content="http://haystome.com/booking/detail/{{ artistProfile.slug }}/">
+    <meta property="og:image" content="{{ artistProfile.cover_picture1.url }}">
+    <meta property="og:title" content=" {{ artistProfile.exp_name }} - Haystome ">
+    <meta property="og:description" content="{{ artistProfile.description }}">
+     <meta name="keywords" content="{{ artistProfile.keywords }}">
+    <meta name="robots" content="index,follow">
+    <meta property='og:video' content='{{ artistProfile.video.url }}' />
+{% endblock %}
+
+{% block body %}
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=1098875453615331&autoLogAppEvents=1"></script>
+	<!-- image gallery -->
+	<div class="gallery" id="gallery">
+		<!--video-->
+		<div class="gallery__column">
+			<div class="gallery__item">
+				<!--<a href="#videoStory" id="videoLink" onclick="videopopup()"> -->
+				<video autoplay="" muted="" loop="" playsinline class="gallery__item__image">
+					<source src="{{ artistProfile.video.url }}" type="video/mp4">
+				</video>
+				<!--</a>
+				<div style="text-align:center;">
+				<div id="videoStory" class="video_popup" onclick="hide()">
+					
+					<video id="vid" autoplay="" muted="true" playsinline loop="" >
+					<source src="{{ artistProfile.video.url }}" type="video/mp4">
+				</video>
+
+				</div>
+				</div>-->
+			</div>
+		</div>
+		<!-- images -->
+		<div class="gallery__column gallery__column--wrap">
+			<div class="gallery__column">
+				<div class="gallery__item">
+					<a class="lightbox" href="{{ artistProfile.cover_picture1.url }}">
+						<img src="{{ artistProfile.cover_picture1.url }}" class="gallery__item__image gallery__item__image--" alt="Bridge">
+					</a>
+				</div>
+			</div>
+			<div class="gallery__column">
+				<div class="gallery__item">
+					<a class="lightbox" href="{{ artistProfile.cover_picture2.url }}">
+						<img src="{{ artistProfile.cover_picture2.url }}" class="gallery__item__image gallery__item__image--" alt="Bridge">
+					</a>
+				</div>
+			</div>
+			<div class="gallery__column">
+				<div class="gallery__item"> 
+					<a class="lightbox" href="{{ artistProfile.cover_picture3.url }}">
+						<img src="{{ artistProfile.cover_picture3.url }}" class="gallery__item__image gallery__item__image--" alt="Bridge">
+					</a>
+				</div>
+			</div>
+			<div class="gallery__column">
+				<div class="gallery__item">
+					<a class="lightbox" href="{{ artistProfile.cover_picture4.url }}">
+						<img src="{{ artistProfile.cover_picture4.url }}" class="gallery__item__image gallery__item__image--" alt="Bridge">
+					</a>
+				</div>
+			</div>
+		</div> 
+	</div>
+	
+	<section class="product">
+	
+	<!-- information -->
+	<div class="product__wrapper">
+		<div class="wrapper wrapper--top">
+			<div class="product__content" style="min-height: 620px;">
+				<!-- header -->
+				<div class="header">
+					<div class="header__top">
+						<div class="header__top__left">
+							<h2 class="header__title">{{ artistProfile.exp_name }}</h2>
+							<h3 class="header__subtitle">{{ artistProfile.skill.name }}</h3>
+						</div> 
+						<div class="header__top__right">
+							<div class="price">
+								<div class="price__wrap">
+									<b class="price__number">${{ artistProfile.price }}</b>
+									<span class="price__guest">per guest</span>
+								</div>
+							</div>
+						</div>
+					</div> 
+					<div class="header__bottom">
+						<div class="desktop-only"><pre style="font-size:100%;font-family:sans-serif;">Hosted by <span class="header__hostname"><b>{{ artistProfile.fullname }}</b></span>       Experience: <span class="header__hostname"><b>{{ artistProfile.experience }} Years</b></span>      Duration: <span class="header__hostname"><b>{{ artistProfile.hour }} Hours</b></span>      Difficulty: <span class="header__hostname"><b>{{ artistProfile.difficulty }}</b></span></pre></div>
+						<div class="mobile-only">
+                            <div style="font-size:100%;font-family:sans-serif;">
+                                <div>
+                                Hosted by <span class="header__hostname"><b>{{ artistProfile.fullname }}</b></span>
+                                    </div>
+                                 <div>
+                                Experience: <span class="header__hostname"><b>{{ artistProfile.experience }} Years</b></span>
+                                </div>
+                                 <div>
+                                Duration: <span class="header__hostname"><b>{{ artistProfile.hour }} Hours</b></span>
+                                </div>
+                                 <div>
+                                Difficulty: <span class="header__hostname"><b>{{ artistProfile.difficulty }}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social" data-href="http://haystome.com/booking/detail/{{ artistProfile.slug }}/" data-layout="button" data-size="small"><a class="icon-facebook" style="text-decoration: none;" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhaystome.com%2Fbooking%2Fdetail%2F{{ artistProfile.slug }}%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
+					</div>
+				</div> 
+				<!-- Why choose this experience and what you will learn? -->
+				<div class="list-wrapper">
+					<h3 class="list-wrapper__title title">Why choose this experience and what you will learn?</h3> 
+					<p class="p__style">
+						{{ artistProfile.description }}
+					</p>
+				</div>
+				
+				<!-- Portfolio -->
+				<div class="portfolio">
+				<h3 class="list-wrapper__title title list-wrapper--space">Portfolio</h3>
+				<div class="index__wrapper my-5">
+					<div class="row__wrapper">
+						<div class="container-fluid col-10">
+							<div id="artistcarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+								<div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    {% if artistProfile.folioImg1.url %}
+									<div class="custom-carousel-item carousel-item col-md-3 folio active" style="z-index:1;">
+										<a class="lightbox" href="{{ artistProfile.folioImg1.url }}">
+										<img class="img-fluid mx-auto d-block" src="{{ artistProfile.folioImg1.url }}"
+											alt="slide 1">
+										</a>	
+									</div>
+                                    {% endif %}
+									{% if artistProfile.folioImg2.url %}
+									<div class="custom-carousel-item carousel-item col-md-3 folio" style="z-index:1;">
+										<a class="lightbox" href="{{ artistProfile.folioImg2.url }}">
+										<img class="img-fluid mx-auto d-block" src="{{ artistProfile.folioImg2.url }}"
+											alt="slide 1">
+										</a>
+									</div>
+                                    {% endif %}
+                                    {% if artistProfile.folioImg3.url %}
+									<div class="custom-carousel-item carousel-item col-md-3 folio" style="z-index:1;">
+										<a class="lightbox" href="{{ artistProfile.folioImg3.url }}">
+										<img class="img-fluid mx-auto d-block" src="{{ artistProfile.folioImg3.url }}"
+											alt="slide 1">
+										</a>
+									</div>
+                                    {% endif %}
+                                    {% if artistProfile.folioImg4.url %}
+									<div class="custom-carousel-item carousel-item col-md-3 folio" style="z-index:1;">
+										<a class="lightbox" href="{{ artistProfile.folioImg4.url }}">
+										<img class="img-fluid mx-auto d-block" src="{{ artistProfile.folioImg4.url }}"
+											alt="slide 1">
+										</a>
+									</div>
+                                    {% endif %}
+                                    {% if artistProfile.folioImg5.url %}
+									<div class="custom-carousel-item carousel-item col-md-3 folio" style="z-index:1;">
+										<a class="lightbox" href="{{ artistProfile.folioImg5.url }}">
+										<img class="img-fluid mx-auto d-block" src="{{ artistProfile.folioImg5.url }}"
+											alt="slide 1">
+										</a>
+									</div>
+                                    {% endif %}
+                                    {% if artistProfile.folioImg6 %}
+									<div class="custom-carousel-item carousel-item col-md-3 folio" style="z-index:1;">
+										<a class="lightbox" href="{{ artistProfile.folioImg6.url }}">
+										<img class="img-fluid mx-auto d-block" src="{{ artistProfile.folioImg6.url }}"
+											alt="slide 1">
+										</a>
+									</div>
+                                    {% endif %}
+                                    {% if artistProfile.folioImg7 %}
+									<div class="custom-carousel-item carousel-item col-md-3 folio" style="z-index:1;">
+										<a class="lightbox" href="{{ artistProfile.folioImg7.url }}">
+										<img class="img-fluid mx-auto d-block" src="{{ artistProfile.folioImg7.url }}"
+											alt="slide 1">
+										</a>
+									</div>
+                                    {% endif %}
+                                    {% if artistProfile.folioImg8 %}
+									<div class="custom-carousel-item carousel-item col-md-3 folio" style="z-index:1;">
+										<a class="lightbox" href="{{ artistProfile.folioImg8.url }}">
+										<img class="img-fluid mx-auto d-block" src="{{ artistProfile.folioImg8.url }}"
+											alt="slide 1">
+										</a>
+									</div>
+                                    {% endif %}
+
+								</div>
+							</div>
+						</div>
+						<div class="col-1">
+							<a class="carousel-control-next text-faded col-md-2" href="#artistcarousel" role="button"
+								data-slide="next">
+								<i class="fa fa-chevron-right fa-lg text-muted"></i>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				</div>
+				
+				<!-- story -->
+				<div class="list-wrapper">
+					<h3 class="list-wrapper__title title list-wrapper--space">{{ artistProfile.fullname }}'s Story</h3>
+					<p class="p__style">
+						{{ artistProfile.story }}
+					</p>
+				</div>
+				<!-- highlight -->
+				<div class="list-wrapper list-wrapper--space">
+					<h3 class="list-wrapper__title title">Highlights</h3> 
+					<ul class="list list--highlights">
+                        {% for high in artistProfile.highlights_list %}
+						<li>{{ high }}</li>
+                        {% endfor %}
+					</ul>
+				</div>
+                <!-- timeline -->
+                {% if artistProfile.timeline %}
+				<div class="list-wrapper list-wrapper--space">
+					<h3 class="list-wrapper__title title">Timeline of the experience</h3>
+					<ul class="list list--highlights">
+                        {% for time in artistProfile.timeline_list %}
+						<li>{{ time }}</li>
+                        {% endfor %}
+					</ul>
+				</div>
+                {% endif %}
+				<!-- inclusive and not inclusive -->  
+				<div class="list-wrapper list-wrapper--column list-wrapper--space">
+					<div class="column">
+						<h3 class="list-wrapper__title title">Inclusive of:</h3> 
+						<ul class="list list--include">
+                            {% for am in artistProfile.amenities_list %}
+							<li>{{ am }}</li>
+							{% endfor %}
+						</ul>
+					</div> 
+					<div class="column">
+						<h3 class="list-wrapper__title title">Not Inclusive of:</h3> 
+						<ul class="list list--exclude">
+							{% for ex in artistProfile.exclude_amenities_list %}
+                                <li>{{ ex }}</li>
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
+                <!-- item to prepare -->
+                {% if artistProfile.item_prepare %}
+				<div class="list-wrapper list-wrapper--space">
+					<h3 class="list-wrapper__title title">Item you need to prepare</h3>
+					<ul class="list list--highlights">
+                        {% for item in artistProfile.item_prepare_list %}
+						<li>{{ item }}</li>
+                        {% endfor %}
+					</ul>
+				</div>
+                {% endif %}
+
+                <!-- booking form -->
+                <div class="list-wrapper" id="BookingFormArea">
+					<h3 class="list-wrapper__title title list-wrapper--space">Booking Form</h3>
+				</div>
+                <div class="container">
+                    <form method="Post" id="booking">
+                {% csrf_token %}
+                <input type="text" id="{{ form.service_type.id_for_label }}" name="{{ form.service_type.html_name }}"
+                       style="display: none">
+                <input type="text" id="{{ form.total_price.id_for_label }}" name="{{ form.total_price.html_name }}"
+                       style="display: none">
+                <input type="text" id="{{ form.booking_date.id_for_label }}"
+                       name="{{ form.booking_date.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.booking_time.id_for_label }}"
+                       name="{{ form.booking_time.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.guest_no.id_for_label }}"
+                       name="{{ form.guest_no.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.service_fees.id_for_label }}"
+                       name="{{ form.service_fees.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.transportation_fees.id_for_label }}"
+                       name="{{ form.transportation_fees.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.subtotal_price.id_for_label }}"
+                       name="{{ form.subtotal_price.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.payer_name.id_for_label }}"
+                       name="{{ form.payer_name.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.passport_id.id_for_label }}"
+                       name="{{ form.passport_id.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.passport_exp_date.id_for_label }}"
+                       name="{{ form.passport_exp_date.html_name }}"
+                       style="display: none">
+
+                 <input type="text"
+                       id="{{ form.email.id_for_label }}"
+                       name="{{ form.email.html_name }}"
+                       style="display: none">
+                 <input type="text"
+                       id="{{ form.phone_number.id_for_label }}"
+                       name="{{ form.phone_number.html_name }}"
+                       style="display: none">
+                 <input type="text"
+                       id="{{ form.language.id_for_label }}"
+                       name="{{ form.language.html_name }}"
+                       style="display: none">
+                 <input type="text"
+                       id="{{ form.question.id_for_label }}"
+                       name="{{ form.question.html_name }}"
+                       style="display: none">
+                 <input type="text"
+                       id="{{ form.pickup_location.id_for_label }}"
+                       name="{{ form.pickup_location.html_name }}"
+                       style="display: none">
+                 <input type="text"
+                       id="{{ form.gender.id_for_label }}"
+                       name="{{ form.gender.html_name }}"
+                       style="display: none">
+                <input type="text"
+                       id="{{ form.promo_code.id_for_label }}"
+                       name="{{ form.promo_code.html_name }}"
+                       style="display: none">
+
+                <script>
+                    var form = document.getElementById("booking");
+                    var totalPrice = null;
+                    var bookingDate = null;
+                    var bookingTime = null;
+                    var totalGuest = null;
+                    var serviceFees = null;
+                    var transportationFees = null;
+                    var subtotalPrice = null;
+
+                    function submitForm(service_type, service_remark) {
+                        document.getElementById('{{ form.booking_date.id_for_label }}').value = bookingDate;
+                        document.getElementById('{{ form.booking_time.id_for_label }}').value = bookingTime;
+                        document.getElementById('{{ form.guest_no.id_for_label }}').value = totalGuest;
+                        document.getElementById('{{ form.total_price.id_for_label }}').value = totalPrice;
+                        document.getElementById('{{ form.service_type.id_for_label }}').value = service_type.concat(", ", service_remark);
+                        document.getElementById('{{ form.service_fees.id_for_label }}').value = serviceFees;
+                        document.getElementById('{{ form.transportation_fees.id_for_label }}').value = transportationFees;
+                        document.getElementById('{{ form.subtotal_price.id_for_label }}').value = subtotalPrice;
+                        document.getElementById('{{ form.payer_name.id_for_label }}').value = "None";
+                        document.getElementById('{{ form.passport_id.id_for_label }}').value = 0;
+                        document.getElementById('{{ form.passport_exp_date.id_for_label }}').value = "None";
+                        document.getElementById('{{ form.email.id_for_label }}').value = "sopheareachte@gmail.com";
+                        document.getElementById('{{ form.gender.id_for_label }}').value = "None";
+                        document.getElementById('{{ form.phone_number.id_for_label }}').value = +999999999;
+                        document.getElementById('{{ form.language.id_for_label }}').value = "None";
+                        document.getElementById('{{ form.question.id_for_label }}').value = "None";
+                        document.getElementById('{{ form.promo_code.id_for_label }}').value = "None";
+                        document.getElementById('{{ form.pickup_location.id_for_label }}').value = "None";
+                        form.submit();
+                    }
+                </script>
+                    <div class="row" style="margin-bottom:25px;">
+                        <div class="col-md-6">
+                            <div class="bookingInfoLabelOut">
+                            <div id="calendarCustom">
+                                <div id="aa">
+                                    <script>
+                                        $(function () {
+                                            $("#aa").datepicker({
+                                                minDate: {{ artistProfile.blocked_day }},
+                                                maxDate: "+24M",
+                                                onSelect: function (dateText, inst) {
+                                                    bookingDate = dateText;
+                                                    $('#selectedDate').text("Your booking date is: " + dateText);
+                                                    $('#bookingTimeSelect').attr('disabled', false);
+                                                }
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                                <span id="selectedDate">Please select your booking date</span>
+                            </div>
+
+                            <div class="bookingInfo">
+                                <span class="bookingInfoLabel">Booking Time</span>
+                                <span>
+                                    <select onchange="timeSelectTrigger(this);" disabled="true" id="bookingTimeSelect"
+                                            class="bookingInfoInput">
+                                    <option value="" disabled selected>Time</option>
+                                        {% for t in artistProfile.booking_time %}
+                                            <option value="{{ t }}">{{ t }}</option>
+                                        {% endfor %}
+                                </select>
+                                <script>
+                                    function timeSelectTrigger(that) {
+                                        if (that.value) {
+                                            bookingTime = that.value;
+                                            $('#bookingGuessSelect').attr('disabled', false);
+                                        }
+                                    }
+                                </script>
+                                </span>
+                            </div>
+
+                            <div class="bookingInfo">
+                                <span class="bookingInfoLabel">Number of Guests</span>
+                                <span>
+                                    <select disabled=True id="bookingGuessSelect" class="bookingInfoInput"
+                                            onchange="guessSelectTrigger(this)">
+                                    <option value="" disabled selected>Guests </option>
+                                        {% for t in artistProfile.guest_number %}
+                                            <option value="{{ t }}">{{ t }} {% if t == 1 %}Guest{% else %}
+                                                Guests{% endif %}</option>
+                                        {% endfor %}
+                                </select>
+                                    {% if services %}
+                                        {% for service in services %}
+                                            <script>
+                                    function guessSelectTrigger(that) {
+                                        if (that.value) {
+                                            if (that.value == 1)
+                                                noGuestSelected = that.value.concat(" Guest");
+                                            else
+                                                noGuestSelected = that.value.concat(" Guests");
+
+
+                                            if (that.value >= 2)
+                                                transportationFee = 0;
+                                            else
+                                                transportationFee = {{ artistProfile.transportation_price }};
+
+                                            totalGuestPrice = that.value *{{ service.price }};
+                                            serviceFee = totalGuestPrice * 0.1;
+                                            serviceFee = serviceFee.toFixed(2);
+                                            totalBookingFees = totalGuestPrice + totalGuestPrice * 0.1 + transportationFee;
+
+                                            totalPrice = totalBookingFees;
+                                            totalGuest = that.value;
+                                            subtotalPrice = totalGuestPrice;
+                                            serviceFees = serviceFee;
+                                            transportationFees = transportationFee;
+                                            $('#booknow').attr('disabled', false);
+                                            $('#totalGuestNumber').text(noGuestSelected);
+                                            $('#totalGuestPrice').text(totalGuestPrice);
+                                            $('#transportationFee').text(transportationFee);
+                                            $('#serviceFee').text(serviceFee);
+                                            $('#totalBookingFees').text(totalBookingFees);
+                                            $('#artistCash').text(totalGuestPrice);
+                                            $('#pricePolicy').css('visibility', 'visible');
+                                        }
+                                    }
+                                </script>
+                                        {% endfor %}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="bookingInfo" style="height:100%;">
+                                <span>
+                                    <b>NOTE:</b> Service fee of <b>10%</b>
+                                    <br>will include Surcharge fee
+                                    <br>if there is less than <b>2</b> guests. <br><br>
+                                </span>
+                                <span id="pricePolicy">
+                                    <!--<b>Pricing Policy:</b> At the end of experience
+                                    <br>this artist definitely receive
+                                    <br>USD<b id="artistCash"></b> from Haystome.-->
+                                </span>
+                                </span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                            {% if services %}
+                            {% for service in services %}
+                                <div class="custom_size">
+                                    <div class="item-grid">
+                                        <div id="serviceImage" class="item-img"
+                                             style="background-image: url({{ service.image.url }});">
+                                        </div>
+                                        <div class="item-desc">
+                                            <div class="item-info">
+                                                <h4 class="custom_title"><a href="#">{{ service.service_name }}</a></h4>
+                                            </div>
+                                            <!-- size -->
+                                            <!--<div class="custom_sub">
+                                                <span class="grade">{{ service.size }}</span>
+                                            </div>-->
+
+                                            <div class="item-detail">
+                                                <div>
+                                                    <table class="servicePriceRow">
+                                                        <tr>
+                                                            <td class="left day_custom"><span
+                                                                    class="icon-alarm"></span><b>{{ service.hour }}
+                                                                Hours</b>
+                                                            </td>
+                                                            <td class="servicePrice">
+                                                                USD<b>{{ service.price }}</b><span>per guest</span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="servicePriceRow">
+                                                        <tr>
+                                                            <td class="left day_custom">
+                                                                Total <span id="totalGuestNumber">Guest</span>
+                                                            </td>
+                                                            <td class="serviceNonPrice">
+                                                                USD<b id="totalGuestPrice">0</b>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="servicePriceRow">
+                                                        <tr>
+                                                            <td class="left day_custom">
+                                                                Surcharge Fee
+                                                            </td>
+                                                            <td class="serviceNonPrice">
+                                                                USD<b id="transportationFee">0</b>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="servicePriceRow">
+                                                        <tr>
+                                                            <td class="left day_custom">
+                                                                Service fee (10%)
+                                                            </td>
+                                                            <td class="serviceNonPrice">
+                                                                USD<b id="serviceFee">0</b>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table class="servicePriceRow">
+                                                        <tr>
+                                                            <td class="left day_custom">
+                                                                <b>Total Fees</b>
+                                                            </td>
+                                                            <td class="servicePrice">
+                                                                USD<b id="totalBookingFees">0</b>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <input type="button" id="booknow"
+                                                       class="btn btn-primary hvr-sweep-to-right switch"
+                                                       onclick="submitForm('{{ service.service_name }}')"
+                                                       disabled="true" value="Book Now"> <!--add size here-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <!-- end form -->
+            <div class="list-wrapper">
+                    {% if reviews.count == 1 %}
+					<h3 class="list-wrapper__title title list-wrapper--space">{{ reviews.count }} Review</h3>
+                    {% else %}
+                        <h3 class="list-wrapper__title title list-wrapper--space">{{ reviews.count }} Reviews</h3>
+                    {% endif %}
+					<div class="review">
+                        {% for review in reviews %}
+								<div class="box">
+                                 {% if not forloop.first %}
+                                            <hr>
+                                        {% endif %}
+									<div class="box__info">
+										<div class="box__image" style="background-image: url('{{ review.image.url }}');"></div>
+										<div class="info">
+											<span class="info__name">{{ review.reviewer_name }}</span>
+											<span class="info__country">
+
+												<span class="icon-locate text-info"></span>
+                                                <span class="info__country__name ">{{ review.location }}</span>
+											</span>
+
+											<div class="rating-default text-warning">
+                                                <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <span class="rating-default__star icon-star"></span>
+                                                        {% else %}
+                                                             <span class="rating-default__star icon-star-empty"></span>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+												<b class="rating-default__number">{{ review.star }}</b>
+											</div>
+										</div>
+										<span class="box__date">{{ review.created_date }}</span>
+									</div>
+
+									<div>
+										<p class="box__detail">{{ review.content }}</p>
+									</div>
+
+								</div>
+                                {% endfor %}
+
+					</div>
+				</div>
+
+            <a href="https://forms.gle/f6DqcXYhj1zndTrMA" target="_blank">
+						<button role="button" class="booking-button shadow p-4 m-5" style="color:white;font-size:25px;font-family:sans-serif;background: #4CAF50;border-radius: 25px;border:none;">
+							<span>Review Me</span>
+						</button>
+            </a>
+			</div>
+
+
+			<!-- side content -->
+			<div class="floating-box desktop-only" style="position: relative;">
+				
+				
+				
+					<div class="wrapper">
+						<img class="img-fluid mx-auto d-block rounded-circle" src="{{ artistProfile.profile_picture.url }}"
+                                alt="artist image">
+					</div>
+				
+				
+				<div class="review-container">
+					<div class="wrapper">
+						<h3 class="list-wrapper__title title d-flex justify-content-center">{{ artistProfile.fullname }}</h3>
+					<p class="p__style" style="font-size:1em;"><i>
+						 "{{ artistProfile.comment }}"
+					</i></p>
+					</div>
+				</div> 
+				
+				
+				<div class="review-container">
+					<div class="wrapper">
+						<div class="review">
+							<!-- 
+							<div class="review__header">
+								
+								<div class="rating-box">
+									<span class="rating-box__number">4.9</span> <small class="rating-box__out">Out of 5</small>
+								</div> 
+								<div class="review__header__column">
+									<div class="rating-default">
+										<span class="icon-star"></span>
+										<span class="icon-star"></span>
+										<span class="icon-star"></span>
+										<span class="icon-star"></span> 
+										<span class="icon-star-half"></span>
+									</div> 
+									<span class="review__header__total-review">38 Reviews</span>
+								</div> 
+							</div> -->
+							<h3 class="list-wrapper__title title d-flex justify-content-center">Traveler Review</h3>
+							<div class="review__list review__list--shrinkable">
+								<!-- review -->
+                                {% for review in reviews|slice:"0:3"  %}
+								<div class="box">
+                                 {% if not forloop.first %}
+                                            <hr>
+                                        {% endif %}
+									<div class="box__info">
+										<div class="box__image" style="background-image: url('{{ review.image.url }}');"></div>
+										<div class="info">
+											<span class="info__name">{{ review.reviewer_name }}</span>
+											<span class="info__country">
+												
+												<span class="icon-locate text-info"></span>
+                                                <span class="info__country__name ">{{ review.location }}</span>
+											</span>
+
+											<div class="rating-default text-warning">
+                                                <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <span class="rating-default__star icon-star"></span>
+                                                        {% else %}
+                                                             <span class="rating-default__star icon-star-empty"></span>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+												<b class="rating-default__number">{{ review.star }}</b>
+											</div>
+										</div> 
+										<span class="box__date">{{ review.created_date }}</span>
+									</div> 
+									
+									<div>
+										<p class="box__detail" style="display: none;">{{ review.content|truncatechars:":150" }}</p>
+										<p class="box__detail box__detail--limited">{{ review.content|truncatechars:":150" }}
+                                            <a href="index.html" onclick="display({{ review.pk }});return false;"><i>Read more</i></a></p>
+
+
+                                <div id="{{ review.pk }}"  class="justify-content-center review_popup" onclick="display({{ review.pk }})" style="display: none;">
+                                         <div class="card mb-4 shadow-sm card_popup">
+                                <div class="card-body" >
+                                        <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center float-right card_popup_img"
+                                                src="{{ review.image.url }}" alt="slide 8" >
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class=" text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class=" text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content }}</p>
+                                    <a href="{% url 'detail_with_slug' slug=review.artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary float-right" >View
+                                                Experience</button>
+                                            </a>
+
+                                </div></div>
+
+                                    </div>
+									</div>
+									
+								</div>
+                                {% endfor %}
+							</div> 
+							<!----> 
+							
+						</div>
+					</div>
+				</div> 
+			
+				<!-- booking info -->
+				<div class="booking-wrap">
+					<div class="wrapper" style="background: linear-gradient(90deg,green 0,#7BE495);">
+						<!-- <div class="booking-wrap__top">
+							<span class="booking-wrap__top__price">$US 27.00</span> per guest
+						</div> --> 
+						<a href="#BookingFormArea">
+						<button role="button" class="booking-button button button--primary">
+							<span class="booking-button__icon"></span> 
+							<span>Instant Book</span>
+						</button>
+                        </a>
+						<!-- <div class="info">
+							<div class="info__column">
+								<span class="info__image info__image--time"></span> 
+								<span class="info__text">4 hours</span>
+							</div> 
+							<div class="info__column">
+								<span class="info__image info__image--guest"></span> 
+								<span class="info__text">1 - 10 guest</span>
+							</div>
+						</div> 
+						<div class="cancellation">
+							<strong class="cancellation__title">Cancellation Policy: Moderate</strong> 
+							<p class="cancellation__text">Full refund available for cancellations made up to 24 hours prior to booking start time.</p>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- experience listing -->
+     <!-- experience listing -->
+    <div class="index__wrapper" id="experience-list" style="margin: 0;">
+        <div class="ml-5">
+            <h3 class="font-weight-small d-flex justify-content-center my-5 font-style-header"><b>Similiar Experiences</b></h3>
+        </div>
+        <div class="row__wrapper">
+            <div class="col-1 desktop-only"></div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-prev col-md-2" href="#explistingcarousel" role="button" data-slide="prev">
+                    <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </div>
+
+            <div class="col-special" style="padding-right:8px;padding-left:10px;">
+            <a class="carousel-control-prev mobile-only" href="#explistingcarousel" role="button" data-slide="prev" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-left fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;" ></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <div id="explistingcarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner row w-100-2 mx-auto" role="listbox">
+                        {% for artist in artists %}
+                            {% if forloop.first %}
+                        <div class="custom-carousel-item custom-carousel-item-font carousel-item col-md-4 active">
+                            <!-- card item1 -->
+                            <div class="card card-borderless mb-4 shadow-sm" >
+                                <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                <div class="d-block "><img class="img-fluid fit-image"
+                                        src="{{ artist.cover_picture1.url }}" alt="slide 8">
+                                </div>
+                                </a>
+                                <div class="card-body font-card">
+                                    <h5>{{ artist.exp_name }}</h5>
+                                    <p class="card-text">{{ artist.description|truncatechars:150  }}
+                                        <a href="{% url 'detail_with_slug' slug=artist.slug %}"><i>Read more</i></a></p>
+                                    <div>
+                                        <div class=" text-bold"><span class="icon-locate text-info"></span>{{ artist.location }}</div>
+                                        <div class="text-bold"><span class="icon-clock text-info"></span>{{ artist.hour }} Hours</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center desktop-only">
+                                        <div class="text-warning">
+                                            <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+
+                                        </div>
+                                        <div class="btn-group">
+                                            <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary" >View
+                                                Experience</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="mobile-only">
+                                        <div class="text-warning">
+                                            <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+
+                                        </div>
+                                        <div class="btn-group mt-2">
+                                            <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary" style="font-size: 80%;">View
+                                                Experience</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+                            {% else %}
+                        <div class="custom-carousel-item custom-carousel-item-font carousel-item col-md-4">
+                            <!-- card item2 -->
+                            <div class="card card-borderless mb-4 shadow-sm" >
+                                 <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                <div class="d-block "><img class="img-fluid fit-image"
+                                        src="{{ artist.cover_picture1.url }}" alt="slide 8"></div>
+                                 </a>
+                                <div class="card-body font-card">
+                                    <h5>{{ artist.exp_name }}</h5>
+                                    <p class="card-text">{{ artist.description|truncatechars:150  }}
+                                        <a href="{% url 'detail_with_slug' slug=artist.slug %}"><i>Read more</i></a></p>
+                                    <div>
+                                        <div class="text-bold"><span class="icon-locate text-info"></span>{{ artist.location }}</div>
+                                        <div class="text-bold"><span class="icon-clock text-info"></span>{{ artist.hour }} Hours</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center desktop-only">
+                                        <div class="text-warning">
+                                            <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+
+                                        </div>
+                                        <div class="btn-group">
+                                             <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                            <button type="button" class="btn btn-sm btn-outline-primary">View
+                                                Experience</button>
+                                             </a>
+                                        </div>
+                                    </div>
+                                    <div class="mobile-only">
+                                        <div class="text-warning">
+                                            <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+
+                                        </div>
+                                        <div class="btn-group mt-2">
+                                            <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary" style="font-size: 80%;">View
+                                                Experience</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        </div>
+                    </div>
+                     <a class="carousel-control-next text-faded mobile-only" href="#explistingcarousel" role="button"
+                    data-slide="next" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-right fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
+
+                <div class="col-1 desktop-only">
+                <a class="carousel-control-next text-faded col-md-2" href="#explistingcarousel" role="button"
+                    data-slide="next" >
+                    <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        <div class="col-1 desktop-only"></div>
+            </div>
+    </div>
+
+
+	</section>
+    <script src="{% static "assets/style/js/baguetteBox.min.js" %}"></script>
+<script>
+    baguetteBox.run('.gallery__column--wrap');
+	baguetteBox.run('.portfolio');
+	div = document.getElementById("videoStory");
+	vid = document.getElementById("vid");
+	nav = document.getElementById("topNav").style.backgroundColor = "black";
+
+	function videopopup() {
+	div.style.display = "inline-block";
+	vid.muted = false;
+	vid.play();
+	}
+	function hide() {
+	div.style.display = "none";
+	vid.muted = true;
+	vid.stop();
+	}
+         function display(pk){
+             var off=document.getElementById(pk);
+             if (off.style.display == "none") {
+                 off.style.display = "block";
+             } else {
+                 off.style.display = "none";
+             }
+         }
+</script>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d1887b822d70e36c2a37016/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+    {% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Review - Haystome </title>
+    <meta name="robots" content="noindex,nofollow">
+
+{% endblock %}
+
+{% block body %}
+    <section class="checkout-page" style="background: linear-gradient(90deg,#0F2027,#203A43,#2C5364);">
+        <div class="container">
+            <div class="border-box" style="border:none;background: transparent;color:white;">
+                <div class="box-title">
+                    <h4 style="color:white;">Review</h4>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Name <span class="required">*</span></label>
+                                {{ form.reviewer_name }}
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Artist <span class="required">*</span></label>
+                                {{ form.artist }}
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Location <span class="required">*</span></label>
+                                {{ form.location }}
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Content <span class="required">*</span></label>
+                                {{ form.content }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Star <span class="required">*</span></label>
+                                {{ form.star }}
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Image <span class="required">*</span></label>
+                                 <div class="custom-file">
+                                    {{ form.image }}
+                                  </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                        </div>
+
+                    <button type="submit" class="checkout_btn" style="color: white;">Submit Review</button>
+                     </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

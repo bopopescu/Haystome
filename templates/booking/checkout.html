@@ -1,0 +1,338 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Checkout - Haystome </title>
+    <meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block body %}
+
+    <section class="checkout-page" style="background: linear-gradient(90deg,#0F2027,#203A43,#2C5364);">
+        <div class="container">
+            <div class="border-box" style="border:none;background: transparent;">
+                <div class="box-title">
+                    <h4 style="color:white;">Billing Details</h4>
+                </div>
+                <br>
+                <div class="row">
+                    <form method="Post" id="checkout">
+                        {% csrf_token %}
+                        <input type="text" id="service_type" name="service_type"
+                               style="display: none">
+                        <input type="text" id="service_fees" name="service_fees"
+                               style="display: none">
+                        <input type="text" id="transportation_fees" name="transportation_fees"
+                               style="display: none">
+                        <input type="text" id="subtotal_price" name="subtotal_price"
+                               style="display: none">
+                        <input type="text" id="booking_time" name="booking_time"
+                               style="display: none">
+                        <input type="text" id="booking_date" name="booking_date"
+                               style="display: none">
+                        <input type="text" id="guest_no" name="guest_no"
+                               style="display: none">
+                        <input type="text" id="total_price" name="total_price"
+                               style="display: none">
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="border-box" style="border:none;background:transparent;color:white;">
+                                    <div align="center" style="font-size: 1.6em;font-family: 'Raleway';">
+                                        <b>Detail Confirmation:</b>
+                                        <hr style="border-color: white;">
+                                    </div>
+                                    <table class="info_tab" border="1" align="center"
+                                           style="font-size: 1em;font-family: Helvetica;border:none;">
+                                        <tr>
+                                            <th style="padding: 10px"><b>Issue Date:</b></th>
+                                            <td style="padding: 10px; text-transform: capitalize">{% now "b. j, Y H:i" %}
+                                                UTC
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding: 10px"><b>Booking Artist:</b></th>
+                                            <td style="padding: 10px">{{ BookingRequest.artist.firstname }} {{ BookingRequest.artist.surname }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding: 10px"><b>Booking Experience:</b></th>
+                                            <td style="padding: 10px">{{ BookingRequest.artist.skill }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding: 10px"><b>Booking Service Type:</b></th>
+                                            <td style="padding: 10px">{{ BookingRequest.service_type }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding: 10px"><b>Total Guest:</b></th>
+                                            <td style="padding: 10px">{{ BookingRequest.guest_no }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding: 10px"><b>Booking for Date:</b></th>
+                                            <td style="padding: 10px">
+                                                <b>{{ BookingRequest.booking_date }} {{ BookingRequest.booking_time }}
+                                                    UTC+7</b></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="padding: 10px"><b>Total Price Fees:</b></th>
+                                            <td style="padding: 10px"><b>{{ BookingRequest.total_price }} USD</b></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border-box" id="payment" style="border:none;background: transparent;color:white;">
+                                    <div class="btn-group card-option" data-toggle="buttons">
+                                        <label class="btn active" data-toggle="tooltip" data-placement="bottom"
+                                               title="Cash">
+                                            <input type="radio" name="options" id="option1" style="display:none;" checked>
+                                            <img src="/static/assets/img/featured/cash.png" alt="">
+                                        </label>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Payer Name <span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="payer_name" name="payer_name"
+                                                       placeholder="Fullname" onkeyup="payerNameKeyUp()"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Passport Identification Number<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="passport_id" name="passport_id" maxlength="18"
+                                                       placeholder="8001015009087" onkeyup="passportIdKeyUp()"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Passport Date of expiration<span class="required">*</span></label>
+                                                <div class="row">
+                                                    <div class="col-sm-7">
+                                                        <input type="text" class="form-control" id="passport_exp_date" name="passport_exp_date"
+                                                               maxlength="11"
+                                                               placeholder="02 JUN 2025" onkeyup="passportExpDateKeyUp()"/>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Gender<span class="required">*</span></label>
+                                                <select  class="form-control" id="gender" name="gender"
+                                                         onkeyup="genderKeyUp()">
+                                                    <option value="MAlE">Male</option>
+                                                    <option value="FEMALE">Female</option>
+                                                    <option value="OTHER">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Language<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="language" name="language" maxlength="18"
+                                                       placeholder="ENGLISH,FRENCH" onkeyup="languageKeyUp()"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Email<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="email" name="email" maxlength="50"
+                                                       placeholder="EMAIL" onkeyup="emailKeyUp()"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Phone Number<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="phone_number" name="phone_number" maxlength="18"
+                                                       placeholder="+855 12 345 678" onkeyup="phoneKeyUp()"/>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Question<span class="required"></span></label>
+                                                <input type="text" class="form-control" id="question" name="question" maxlength="300"
+                                                       placeholder="ANY QUESTION FOR US" onkeyup="questionKeyUp()"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Pick up Location<span class="required">*</span> (Please Make Sure You Submit The Right Location)</label>
+                                                <input type="text" class="form-control" id="pickup_location" name="pickup_location" maxlength="1000"
+                                                       placeholder="Location name" onkeyup="pickupKeyUp()"/>
+                                                <div id="map" style="width:100%;height:400px;"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><span id="checkStar" style="display: none">*</span><input id="agreeCheckbox"
+                                                                                                         type="checkbox"/>
+                                            I agree to paid <b>{{ BookingRequest.total_price }} USD</b> in cash to
+                                            Haystome's facilitator
+                                            <br>before the experience start, and confirm that the entered information above
+                                            is valid.</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label onclick="promoInput()"><span
+                                                    class="badge badge-warning ml-1">PROMO CODE</span> </label>
+                                            <input type="text" class="form-control" id="promo_code" name="promo_code" maxlength="18"
+                                                   placeholder="Enter your promo code" onkeyup="promo()" style="display: none;"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group text-white">
+                                        </br>
+                                        <script>
+                                            var form = document.getElementById("checkout");
+
+                                            function checkoutSubmit() {
+                                                if (document.getElementById('payer_name').value.length == 0 || document.getElementById('passport_id').value.length == 0 || document.getElementById('passport_exp_date').value.length == 0 || document.getElementById('gender').value.length == 0 || document.getElementById('email').value.length == 0 || document.getElementById('pickup_location').value.length == 0 || document.getElementById('phone_number').value.length == 0 || document.getElementById('language').value.length == 0 || document.getElementById('agreeCheckbox').checked == false) {
+                                                    if (document.getElementById('payer_name').value.length == 0)
+                                                        $("#payer_name").css('border', '3px solid red');
+                                                    if (document.getElementById('passport_id').value.length == 0)
+                                                        $("#passport_id").css('border', '3px solid red');
+                                                    if (document.getElementById('passport_exp_date').value.length == 0)
+                                                        $("#passport_exp_date").css('border', '3px solid red');
+                                                    if (document.getElementById('gender').value.length == 0)
+                                                        $("#gender").css('border', '3px solid red');
+                                                    if (document.getElementById('email').value.length == 0)
+                                                        $("#email").css('border', '3px solid red');
+                                                    if (document.getElementById('language').value.length == 0)
+                                                        $("#language").css('border', '3px solid red');
+                                                    if (document.getElementById('phone_number').value.length == 0)
+                                                        $("#phone_number").css('border', '3px solid red');
+                                                    if (document.getElementById('pickup_location').value.length == 0)
+                                                        $("#pickup_location").css('border', '3px solid red');
+                                                    if (document.getElementById('agreeCheckbox').checked == false)
+                                                        $("#agreeCheckbox").css('outline', '2px solid #ff0000');
+                                                    $('html, body').animate({
+                                                        scrollTop: $("#payment").offset().top -50
+                                                    }, 2000);
+
+                                                } else {
+                                                    document.getElementById('booking_date').value = new Date(Date.parse("{{ BookingRequest.booking_date }}")).toLocaleDateString('en-US');
+                                                    document.getElementById('booking_time').value = "{{ BookingRequest.booking_time }}";
+                                                    document.getElementById('guest_no').value = {{ BookingRequest.guest_no }};
+                                                    document.getElementById('total_price').value = {{ BookingRequest.total_price }};
+                                                    document.getElementById('service_type').value = "{{ BookingRequest.service_type }}";
+                                                    document.getElementById('service_fees').value = {{ BookingRequest.service_fees }};
+                                                    document.getElementById('transportation_fees').value = {{ BookingRequest.transportation_fees }};
+                                                    document.getElementById('subtotal_price').value = {{ BookingRequest.subtotal_price }};
+                                                    document.getElementById('payer_name').value = document.getElementById('payer_name').value.toUpperCase();
+                                                    document.getElementById('passport_id').value = document.getElementById('passport_id').value.toUpperCase();
+                                                    document.getElementById('passport_exp_date').value = document.getElementById('passport_exp_date').value.toUpperCase();
+                                                    document.getElementById('language').value = document.getElementById('language').value.toUpperCase();
+                                                    form.submit();
+                                                }
+
+                                            }
+                                        </script>
+                                        <a onclick="checkoutSubmit()" type="submit" id="checkoutBtn" value="checkout"
+                                           class="checkout_btn">Proceed Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // This example adds a search box to a map, using the Google Place Autocomplete
+        // feature. People can enter geographical searches. The search box will return a
+        // pick list containing a mix of places and predicted search terms.
+
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+        function initAutocomplete() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 13.3405053, lng: 103.8529145},
+                zoom: 11,
+                mapTypeId: 'roadmap'
+            });
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pickup_location');
+            var searchBox = new google.maps.places.SearchBox(input);
+
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function() {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            var markers = [];
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach(function(marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    var icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25)
+                    };
+
+                    // Create a marker for each place.
+                    markers.push(new google.maps.Marker({
+                        map: map,
+                        icon: icon,
+                        title: place.name,
+                        position: place.geometry.location
+                    }));
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_CT7Hn-_QrAWe-yreYWCNj8JvDP7uqCI&libraries=places&callback=initAutocomplete"
+            async defer></script>
+{% endblock %}
+

@@ -1,0 +1,152 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> {{ blogProfile.name }} - Haystome </title>
+        <meta name="description" content="{{ blogProfile.description}}"/>
+    <link rel="canonical" href="http://haystome.com/booking/blog/blogdetail/{{ blogProfile.slug }}/" />
+    <meta property="og:url" content="http://haystome.com/booking/blog/blogdetail/{{ blogProfile.slug }}/">
+    <meta property="og:title" content=" {{ blogProfile.name }} - Haystome ">
+    <meta property="og:image" content="{{ blogProfile.image.url }}">
+    <meta property="og:description" content="{{ blogProfile.description}}">
+      <meta name="keywords" content="{{ blogProfile.keywords }}">
+    <meta name="robots" content="index,follow">
+{% endblock %}
+
+{% block body %}
+      <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=1098875453615331&autoLogAppEvents=1"></script>
+    <div class="post-single left">
+        <div class="page-img" style="background-image: url({{ blogProfile.image.url }});">
+            <div class="page-img-txt container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <h1 class="main-head">{{ blogProfile.name }}</h1>
+                    </div>
+                    <div class="colsm-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="white">
+            <div class="container my-5">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="author">
+                            <span>By <span style="color: #28a745;"><b>{{ blogProfile.creator_name }} &#8226; {{ blogProfile.location }} &#8226; {{ blogProfile.created_date }}</b> </span> </span>
+                            </div>
+                        <div class="post">
+                            <p>{{ blogProfile.content|safe|linebreaks }}</p>{% if blogProfile.source %}
+                            <div><i>Source:</i><a href="{{ blogProfile.source }}" target="_blank"> {{ blogProfile.source }}</a></div> {% endif %}
+                            <div class="social" data-href="http://haystome.com/booking/blog/blogdetail/{{ blogProfile.slug }}/" data-layout="button" data-size="small">Share Now: <a class="icon-facebook" style="text-decoration: none;" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fhaystome.com%2Fbooking%2Fblog%2Fblogdetail%2F{{ blogProfile.slug }}%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>
+                        </div>
+
+
+                        {#                        <div class="tag-wrap">#}
+                        {#                            <a href="#" rel="tag">blog</a>#}
+                        {#                            <a href="#" rel="tag">more</a>#}
+                        {#                            <a href="#" rel="tag">one</a>#}
+                        {#                            <a href="#" rel="tag">read</a>#}
+                        {#                        </div>#}
+                        {##}
+                        {#                        <div class="share-box">#}
+                        {#                            <h5 class="title">Share this entry</h5>#}
+                        {#                            <div class="social-icon-wrap">#}
+                        {#                                <a href="#" class="social-icon"><span class="fa fa-facebook"></span></a>#}
+                        {#                                <a href="#" class="social-icon"><span class="fa fa-google"></span></a>#}
+                        {#                                <a href="#" class="social-icon"><span class="fa fa-twitter"></span></a>#}
+                        {#                                <a href="#" class="social-icon"><span class="fa fa-linkedin"></span></a>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <div class="sidebar">
+                            {#                            <div class="border-box">#}
+                            {#                                <div class="box-title">Experience Search</div>#}
+                            {#                                <div class="input-group">#}
+                            {#                                    <input type="text" class="form-control footer-input-sub" placeholder="Search Site">#}
+                            {#                                    <div class="input-group-btn">#}
+                            {#                                        <button class="btn btn-primary footer-sub-button">Search</button>#}
+                            {#                                    </div>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+
+                            <div class="border-box">
+                                <div class="box-title">Recent Blog Post</div>
+                                <div class="recent-post-list">
+                                    {% for blogProfile in recentBlogProfiles %}
+                                        <div class="recent-post">
+                                            <a href="{% url 'blogdetail_with_slug' slug=blogProfile.slug %}">
+                                                <div class="author-img"><img src="{{ blogProfile.image.url }}" class="media-object" alt=""></div>
+                                            </a>
+                                            <div class="post-summary">
+                                                <a href="{% url 'blogdetail_with_slug' slug=blogProfile.slug %}">
+                                                    <p>{{ blogProfile.name }}</p>
+                                                </a>
+                                                <div class="byline">
+                                                    <span class="updated">{{ blogProfile.created_date }}</span>
+                                                    <span class="dot">·</span>
+                                                    <span class="italic">By</span>&nbsp;
+                                                    <a href="#" rel="author"
+                                                       class="fn">{{ blogProfile.creator_name }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <!-- <div class="recent-post">
+                                         <div class="author-img"><img src="/static/assets/img/team/2-sm.jpg" class="media-object"
+                                                                      alt=""></div>
+                                         <div class="post-summary">
+                                             <p>Lorem ipsum dolor sit amet, cons adipisicing elit.</p>
+                                             <div class="byline">
+                                                 <span class="updated">Jan 24, 2015</span>
+                                                 <span class="dot">·</span>
+                                                 <span class="italic">By</span>&nbsp;
+                                                 <a href="#" rel="author" class="fn">Keira Hopman</a>
+                                             </div>
+                                         </div>
+                                     </div> -->
+                                </div>
+                            </div>
+
+
+                            {#                            <div class="border-box">#}
+                            {#                                <div class="box-title">Categories</div>#}
+                            {#                                <ul class="list">#}
+                            {#                                    <li class="cat-item"><a href="#">Creative (2)</a></li>#}
+                            {#                                    <li class="cat-item"><a href="#">Design (9)</a></li>#}
+                            {#                                    <li class="cat-item"><a href="#">Image (2)</a></li>#}
+                            {#                                    <li class="cat-item"><a href="#">Photography (9)</a></li>#}
+                            {#                                    <li class="cat-item"><a href="#">Videos (4)</a></li>#}
+                            {#                                    <li class="cat-item"><a href="#">WordPress (4)</a></li>#}
+                            {#                                </ul>#}
+                            {#                            </div>#}
+
+                            {#                            <div class="border-box">#}
+                            {#                                <div class="box-title">Tags</div>#}
+                            {#                                <div class="tagcloud">#}
+                            {#                                    <a href="#" class="tag-link" title="2 topics">artwork</a>#}
+                            {#                                    <a href="#" class="tag-link" title="2 topics">Photo</a>#}
+                            {#                                    <a href="#" class="tag-link" title="3 topics">Video</a>#}
+                            {#                                    <a href="#" class="tag-link" title="1 topic">Videos</a></div>#}
+                            {#                            </div>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d1887b822d70e36c2a37016/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+{% endblock %}

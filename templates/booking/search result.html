@@ -1,0 +1,578 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Discover Authentic Art Experience in Cambodia - Haystome </title>
+     <meta name="description" content="Discover authentic art experience in Cambodia from Traditional Sculpture to Bokator:Khmer Boxing."/>
+    <link rel="canonical" href="http://haystome.com/booking/search/" />
+    <meta property="og:url" content="http://haystome.com/booking/search/">
+    {% for location in location %}
+    <meta property="og:image" content="{{ location.cover_picture.url }}">
+    {% endfor %}
+    <meta property="og:title" content=" Discover Authentic Art Experience in Cambodia - Haystome ">
+    <meta property="og:description" content="Discover authentic art experience in Cambodia from Traditional Sculpture to Bokator:Khmer Boxing.">
+    <meta name="robots" content="index,follow">
+{% endblock %}
+
+{% block body %}
+
+    <!-- main image -->
+    {% for location in location %}
+    <div class="col position-relative mh-200 overflow-hidden text-center bg"
+        style="background-image: url('{{ location.cover_picture.url }}');">
+        <!-- header text -->
+        <div class="text-left mx-5 px-4 my-5 py-4 text-white text-shadow" style="background-color:rgba(0,0,0,.5);">
+            <h2 class="text-uppercase loc_header">
+                {{ location.name }}
+            </h2>
+            <p class="text-italic loc_content">
+                {{ location.description }}
+            </p>
+        </div>
+
+    </div>
+    {% endfor %}
+	
+	<!-- category listing -->
+    <div class="index__wrapper">
+         <form action="{% url 'search' %}" method="get" id="search-form" style="width:100%;">
+        <h3 class="font-weight-small text-center my-4 font-style-header"><b>Choose Your Category</b></h3>
+        <div class="row__wrapper">
+            <div class="col-1 desktop-only"></div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-prev col-md-2" href="#categorycarousel" role="button" data-slide="prev">
+                    <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </div>
+            <div class="container-fluid col-special">
+            <a class="carousel-control-prev mobile-only" href="#categorycarousel" role="button" data-slide="prev" style="padding:0px;width:10%;z-index: 4;">
+                    <i class="fa fa-chevron-left fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;" ></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <div id="categorycarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner row w-100-2 mx-auto" role="listbox">
+                        {% for skill in skills %}
+                            {% if forloop.first %}
+                        <button class="custom-carousel-item carousel-item col-md-3 reset_type active" value="{{ skill.name }}" type="button"  style="border:none;background:white;-webkit-appearance: none;z-index: 1;" onclick="submitForm(this)">
+                            <img class="img-fluid mx-auto d-block" src="{{ skill.cover_picture.url }}"
+                                alt="slide 1">
+                            <p class="h4 text-center">{{ skill.name }}</p>
+                        </button>
+                            {% else %}
+
+                        <button class="custom-carousel-item carousel-item col-md-3 reset_type"  value="{{ skill.name }}" type="button" style="border:none;background:white;-webkit-appearance: none;z-index: 1;" onclick="submitForm(this)">
+                            <img class="img-fluid mx-auto d-block " src="{{ skill.cover_picture.url }}"
+                                alt="slide 2">
+                            <p class="h4 text-center">{{ skill.name }}</p>
+                        </button>
+
+                            {% endif %}
+                        {% endfor %}
+
+                        <!--<div class="custom-carousel-item carousel-item col-md-3">
+                            <img class="img-fluid mx-auto d-block " src="assets/img/featured/400x250.png"
+                                alt="slide 3">
+                            <p class="h4 text-center">Sculpture</p>
+                        </div>
+                        <div class="custom-carousel-item carousel-item col-md-3">
+                            <img class="img-fluid mx-auto d-block " src="assets/img/featured/400x250.png"
+                                alt="slide 4">
+                            <p class="h4 text-center">Saramix Class</p>
+                        </div>
+                        <div class="custom-carousel-item carousel-item col-md-3">
+                            <img class="img-fluid mx-auto d-block " src="assets/img/featured/400x250.png"
+                                alt="slide 5">
+                            <p class="h4 text-center">Traditional Music</p>
+                        </div>
+                        <div class="custom-carousel-item carousel-item col-md-3">
+                            <img class="img-fluid mx-auto d-block " src="assets/img/featured/400x250.png"
+                                alt="slide 6">
+                            <p class="h4 text-center">Traditional Dancing</p> -->
+                        </div>
+                    </div>
+            <a class="carousel-control-next text-faded mobile-only" href="#categorycarousel" role="button"
+                    data-slide="next" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-right fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;z-index: 2;"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
+                <div class="col-1 desktop-only">
+                <a class="carousel-control-next text-faded col-md-2" href="#categorycarousel" role="button"
+                    data-slide="next">
+                    <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
+            <div class="col-1 desktop-only"></div>
+            </div>
+            {% for loc in location %}
+                        <input type="hidden" name="location" value="{{ loc.name }}">
+                        {% endfor %}
+                        <input type="hidden" id="skill" name="skill">
+                    </form>
+                    <script>
+                        function submitForm(skill)
+                    {
+                        var e = skill.value ;
+                        document.getElementById('skill').value = e;
+                        document.getElementById("search-form").submit();
+                    }
+                    </script>
+        </div>
+	
+	
+	
+	<!-- experience listing -->
+	<!-- middle section -->
+    <div class="exp__wrapper">
+        <div class="row">
+            <!-- review -->
+            <div class="col-3 desktop-only">
+                <!-- title -->
+                <div class="row mb-4">
+                    <h3 class="text-bold text-left text-capitalize font-style-header">traveller review</h3>
+                </div>
+
+                
+                <!-- review list -->
+                <div id="reviewCardContainer" class="row col-md-11 px-0">
+                    {% for review in recent_reviews %}
+                    <!-- card item1 -->
+                    <div id="reviewCard" class="card mb-3 shadow-sm" >
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-5 align-self-center">
+                                    <img class="fit-image rounded-circle text-center"
+                                        src="{{ review.image.url }}" alt="slide 8">
+                                </div>
+                                <div class="col-7 text-left align-self-center">
+                                    <div class="text-bold">{{ review.reviewer_name }}</div>
+                                    <div class="text-small "><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                    <div class=" text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                    <div class="text-small">{{ review.artist.exp_name }}</div>
+                                    <div class="text-warning">
+                                        <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-text text-small">{{ review.content|truncatechars:150 }}
+                                <a href="index.html" onclick="display({{ review.pk }});return false;"><i>Read more</i></a></p>
+
+
+                                    <div id="{{ review.pk }}"  class="justify-content-center review_popup" onclick="display({{ review.pk }})" style="display: none;">
+                                         <div class="card mb-4 shadow-sm card_popup">
+                                <div class="card-body" >
+                                        <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center float-right card_popup_img"
+                                                src="{{ review.image.url }}" alt="slide 8">
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class=" text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class=" text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content }}</p>
+                                    <a href="{% url 'detail_with_slug' slug=review.artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary float-right" >View
+                                                Experience</button>
+                                            </a>
+
+                                </div></div>
+
+                                    </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+					{% endfor %}
+                </div>
+                
+            </div>
+
+
+            <!-- services -->
+            <div class="col-md-9 col-sm-8">
+                <!-- title -->
+                <div class="row mb-4">
+                    <h3 class="text-bold text-left text-capitalize font-style-header">haystome recommend</h3>
+                </div>
+
+                <!-- services list -->
+                <div id="serviceCardContainer" class="row">
+                    {% for artist in artists %}
+                    <!-- card item1 -->
+                    <div id="serviceCard" class="card custom-service-card mb-4 col-md-4 px-0 mr-4 shadow-sm">
+                        <a href="{% url 'detail_with_slug' slug=artist.slug %}"><div class="d-block "><img class="img-fluid fit-image" src="{{ artist.cover_picture1.url }}"
+                                alt="slide 8"></div>
+                        </a>
+                        <div class="card-body">
+                            <h5>{{ artist.exp_name }}</h5>
+                            <p class="card-text">{{ artist.description|truncatechars:150 }}
+                                <a href="{% url 'detail_with_slug' slug=artist.slug %}"><i>Read more</i></a></p>
+                            <div>
+                                <div class="icon-locate text-bold">{{ artist.location.name }}</div>
+                                <div class="icon-clock text-bold">{{ artist.hour }} Hours</div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-warning">
+                                    <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                </div>
+                                <div class="btn-group">
+                                    <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                    <button type="button" class="btn btn-sm btn-outline-primary">View
+                                        Experience</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+					{% endfor %}
+                </div>
+                <form action="{% url 'search' %}" method="post" id="page-form" style="width:100%;">
+                {% csrf_token %}
+				<div class="pagination-wrap">
+                    <span class="total">Total {{ artists.paginator.count }}</span>
+                    <nav class="pull-right">
+					
+                        <ul class="pagination">
+                           {% for num in artists.paginator.page_range %}
+                               {% if artists.number == num %}
+                                   <button value="{{ num }}" type="button"  style="border:none;background:white;-webkit-appearance: none;z-index: 1;" onclick="submitPage(this)"><li class="page-item"><a class="page-link active">{{ num }}</a></li></button>
+                               {% elif num > artists.number|add:'-2' and num < artists.number|add:'2' %}
+                                   <button value="{{ num }}" type="button"  style="border:none;background:white;-webkit-appearance: none;z-index: 1;" onclick="submitPage(this)"><li class="page-item"><a class="page-link" onclick="submitPage({{ num }})">{{ num }}</a></li></button>
+                               {% endif %}
+                            {% endfor %}
+                        </ul>
+						
+                    </nav>
+                    <div class="clearfix"></div>
+                </div>
+                {% for loc in location %}
+                        <input type="hidden" name="location" value="{{ loc.name }}">
+                        {% endfor %}
+                        <input type="hidden" name="skill" value="{{ skill }}">
+                        <input type="hidden" id="page" name="page">
+                    </form>
+                    <script>
+                        function submitPage(page)
+                    {
+                        var e = page.value ;
+                        document.getElementById('page').value = e;
+                        document.getElementById("page-form").submit();
+                    }
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+	
+	
+	
+	
+	
+				
+	
+	
+	
+    <!-- artist carousel -->
+    <div class="index__wrapper py-4" id="artist-list"  style="margin: 0;">
+        <h3 class="font-weight-small text-center my-4 font-style-header"><b>Our Local Artists</b></h3>
+        <div class="row__wrapper">
+            <div class="col-1 desktop-only"></div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-prev col-md-2" href="#artistcarousel" role="button" data-slide="prev">
+                    <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </div>
+            <div class="container-fluid col-special" style="padding-right:8px;padding-left:10px;">
+                <a class="carousel-control-prev mobile-only" href="#artistcarousel" role="button" data-slide="prev" style="padding:0px;width:10%;z-index: 4;">
+                    <i class="fa fa-chevron-left fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;" ></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <div id="artistcarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        {% for artist in artists %}
+                         {% if forloop.first %}
+                        <div class="custom-carousel-item carousel-item col-md-3 active" style="z-index:1;">
+                            <a href="{% url 'detail_with_slug' slug=artist.slug %}" style="text-decoration: none;">
+                             <img class="img-fluid2 mx-auto d-block rounded-circle" src="{{artist.profile_picture.url}}"
+                                alt="slide 1">
+                            <p class="h5 text-center">{{ artist.fullname }}</p>
+                            </a>
+                        </div>
+                        {% else %}
+                          <div class="custom-carousel-item carousel-item col-md-3"  style="z-index:1;">
+                            <a href="{% url 'detail_with_slug' slug=artist.slug %}" style="text-decoration: none;">
+                            <img class="img-fluid2 mx-auto d-block rounded-circle" src="{{artist.profile_picture.url}}"
+                                alt="slide 1">
+                            <p class="h5 text-center">{{ artist.fullname }}</p>
+                            </a>
+                          </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+             <a class="carousel-control-next text-faded mobile-only" href="#artistcarousel" role="button"
+                    data-slide="next" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-right fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;"></i>
+                    <span class="sr-only">Next</span>
+                  </a>
+            </div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-next text-faded col-md-2" href="#artistcarousel" role="button"
+                    data-slide="next">
+                    <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        <div class="col-1 desktop-only"></div>
+        </div>
+    </div>
+
+    <!-- traveller review -->
+    <div class="index__wrapper">
+        <h3 class="font-weight-small text-center my-4 font-style-header"><b>Traveler Reviews</b></h3>
+        <div class="row__wrapper">
+            <div class="col-1 desktop-only"></div>
+            <div class="col-1 desktop-only">
+                 <a class="carousel-control-prev col-md-2" href="#travellerreview" role="button" data-slide="prev">
+                            <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+            </div>
+            <div class="col-special" style="padding-right:8px;padding-left:10px;">
+            <a class="carousel-control-prev mobile-only" href="#travellerreview" role="button" data-slide="prev" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-left fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;" ></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <div id="travellerreview" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner row w-100-2 mx-auto" role="listbox">
+                        {% for review in reviews %}
+                            {% if forloop.first %}
+                        <div class="custom-carousel-item carousel-item col-md-4 active">
+                            <!-- card item1 -->
+                            <div class="card mb-4 shadow-sm"  >
+                                <div class="card-body ">
+                                    <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center"
+                                                src="{{ review.image.url }}" alt="slide 8">
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class=" text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class=" text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content|truncatechars:150 }}
+                                       <a href="index.html" onclick="display({{ review.pk }}2);return false;"><i>Read more</i></a></p>
+
+                                <div id="{{ review.pk }}2"  class="justify-content-center review_popup" onclick="display({{ review.pk }}2)" style="display: none;">
+                                         <div class="card mb-4 shadow-sm card_popup">
+                                <div class="card-body" >
+                                        <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center float-right card_popup_img"
+                                                src="{{ review.image.url }}" alt="slide 8" >
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class=" text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class=" text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content }}</p>
+                                    <a href="{% url 'detail_with_slug' slug=review.artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary float-right" >View
+                                                Experience</button>
+                                            </a>
+
+                                </div></div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- end card -->
+                        </div>
+                            {% else %}
+                        <div class="custom-carousel-item carousel-item col-md-4">
+                            <!-- card item1 -->
+                            <div class="card mb-4 shadow-sm"  >
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center"
+                                                src="{{ review.image.url }}" alt="slide 8">
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class="text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class="text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content|truncatechars:150 }}
+                                        <a href="index.html" onclick="display({{ review.pk }}2);return false;"><i>Read more</i></a></p>
+
+                                <div id="{{ review.pk }}2"  class="justify-content-center review_popup" onclick="display({{ review.pk }}2)" style="display: none;">
+                                         <div class="card mb-4 shadow-sm card_popup">
+                                <div class="card-body" >
+                                        <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center float-right card_popup_img"
+                                                src="{{ review.image.url }}" alt="slide 8">
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class=" text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class=" text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content }}</p>
+                                    <a href="{% url 'detail_with_slug' slug=review.artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary float-right" >View
+                                                Experience</button>
+                                            </a>
+
+                                </div></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+           <a class="carousel-control-next text-faded mobile-only" href="#travellerreview" role="button"
+                    data-slide="next" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-right fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-next text-faded col-md-2" href="#travellerreview" role="button"
+                            data-slide="next">
+                            <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+            </div>
+            <div class="col-1 desktop-only"></div>
+        </div>
+    </div>
+
+    </div>
+    <script>
+         function display(pk){
+             var off=document.getElementById(pk);
+             if (off.style.display == "none") {
+                 off.style.display = "block";
+             } else {
+                 off.style.display = "none";
+             }
+         }
+     </script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d1887b822d70e36c2a37016/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+   {% endblock %}

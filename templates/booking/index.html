@@ -1,0 +1,760 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Book & Experience Authentic Art in Cambdoia - Haystome </title>
+    <meta name="description" content="Enjoy experiential travelling and unforgettable art experience with Haystome. Find authentic art experience and book experience class, workshop, and masterclass in Cambodia."/>
+    <link rel="canonical" href="http://www.haystome.com" />
+    <meta property="og:url" content="https://www.haystome.com">
+    <meta property="og:title" content=" Book & Experience Authentic Art in Cambdoia - Haystome ">
+    <meta property="og:image" content="{% static "assets/img/logo/favicon.png" %}">
+    <meta property="og:description" content="Enjoy experiential travelling and unforgettable art experience with Haystome. Find authentic art experience and book experience class, workshop, and masterclass in Cambodia.">
+     <meta name="keywords" content="book authentic art experience in Cambodia, art experience Cambodia, art experience Siem Reap, art experience Phnom Penh, travel Cambodia, Cambodia art,Cambodian artist,Cambodia Sculpture,Cambodia Dancing,Cambodia art,Cambodia artist">
+    <meta name="robots" content="index,follow">
+{% endblock %}
+
+{% block body %}
+
+    <!-- main image -->
+    <div class="col position-relative mh-850 overflow-hidden text-center bg">
+    <video autoplay muted loop  class="video_index desktop-only">
+  <source src="/static/assets/back_vdo3.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+        <!-- header text -->
+        <div class="row col-sm-5 p-lg-5 mx-auto myt-10 my-2 textbg">
+            <h1 class="display-5 font-weight-normal text-white" style="font-size:3em;">Authentic Art Experience In Cambodia</h1>
+            <p class="lead font-weight-small text-white">The Best Digital Platform to provide Booking Services for
+                various
+                Authentic Art Experiences in Cambodia</p>
+            <!-- search bar -->
+            <!-- <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Where are you going?">
+                <div class="input-group-append">
+                    <button class="btn prime-btn my-sm-0 input-group-text" type="submit">Search</button>
+                </div>
+            </div> -->
+            <!-- Split dropup button -->
+            <form action="{% url 'search'%}" method="get" id="search-form" style="width:100%;">
+            <div class="btn-group dropdown w-100">
+
+                <input type="text" class="form-control btnr-sq" placeholder="Where are you going?" id="main-search-bar" name="location">
+                <button type="button" class="btn btn-sq btn-success dropdown-toggle dropdown-toggle-split"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="input-group-append">
+                    <button class="btn prime-btn btnl-sq input-group-text" style="border-radius: 0px 5px 5px 0px;" type="submit" id="search-button">Search</button>
+                </div>
+
+                <div class="dropdown-menu" id="dropdown_search">
+                    {% for location in locations %}
+                    <button class="dropdown-item" value="{{ location.name }}" onclick="fillValue(this);">{{ location.name }}</button>
+                    {% endfor %}
+                    <!--<div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Action<span
+                        class="badge badge-danger ml-1">Special Offer</span></a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a> -->
+                </div>
+                <script>
+                    function fillValue(location)
+                    {
+                        var e = location.value ;
+                        document.getElementById('main-search-bar').value = e;
+                    }
+                </script>
+            </div>
+             </form>
+        </div>
+
+
+    </div>
+
+	<!-- company value card -->
+
+	<div class="row desktop-only" style="margin:0px;">
+            <div class="col order-last card mb-4 shadow mx-2 mt-1 mr-4 font-weight-small text-left text-justify py-2">
+                <div class="row">
+                    <div class="col-sm-2"><img src="{% static "assets/img/vector/sticker001.svg" %}" width="50" height="80"
+                            alt="Haystome" /></div>
+                    <div class="col-sm-10 py-2 text-dark">
+                        <h6 class="my-0 font-weight-small value_header">Handmade Experience</h6>
+                        <p class="value_content">Cambodian Artists craft their Handmade art works with delicate and masterful skill through painstaking efforts and attentive details.
+                            The Handmade art works unveil the soul and knowledge of Cambodian craftmanship and Culture! <!--<a
+                                href="#" class="textbg"><i>Read more</i></a>--></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col card mb-4 shadow mx-2 mt-1 font-weight-small text-left text-justify py-2">
+                <div class="row">
+                    <div class="col-sm-2"><img src="{% static "assets/img/vector/sticker002.svg" %}" width="70" height="80"
+                            alt="Haystome" /></div>
+                    <div class="col-sm-10 py-2 text-dark">
+                        <h6 class="my-0 font-weight-small value_header">Workshop With Local People</h6>
+                        <p class="value_content">The Patient and Unyielding Passion of Local People live in the form of honing their arts and in the soul and nature of Cambodian people.
+                            Local People has preserved and passed on their knowledge and skill through many fine workshops! <!--<a
+                                href="#" class="textbg"><i>Read more</i></a>--></p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col order-first card mb-4 shadow mx-2 mt-1 ml-4 font-weight-small text-left text-justify py-2">
+                <div class="row">
+                    <div class="col-sm-2"><img src="{% static "assets/img/vector/sticker003.svg" %}" width="50" height="80"
+                            alt="Haystome" /></div>
+                    <div class="col-sm-10 py-2 text-dark">
+                        <h6 class="my-0 font-weight-small value_header">Authentic Art Experience With Local Artists</h6>
+                        <p class="value_content" >In Cambodia, artists spend their lifetime to hone their skills and mastering various arts.
+                            Experience Authentic Art Experience to appreciate the delicacy and creativeness of Local Artists! <!--<a
+                                href="#" class="textbg"><i>Read more</i></a>--></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- company mission -->
+    <div class="index__wrapper">
+        <div class="font-weight-small text-left text-justify py-2">
+            <div class="row_mission">
+                <div class="col-sm-5 desktop-only">
+                    <img class="img-fluid rounded float-left" src="{% static "assets/img/featured/our-mission2.jpg" %}"
+                        width="fit" height="300" alt="Haystome" /></div>
+                <div class="col-sm-7 py-2 text-center my-auto">
+                    <h3 class="font-weight-normal font-style-header"><b>Our Mission</b></h3>
+                    <p class="font-style-p" style="font-family: Raleway,SansSerif,Helvetica;">“Haystome starts with the aim of providing the alternative source of income for Cambodian artists who are
+                    facing financial struggles and We support Cambodia Art and Culture by promoting people who spend their lifetime honed and practice arts in Cambodia through our platform to allow our local artists to continue practicing our Arts and bring their creativeness to craft more masterpieces.”</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- artist carousel -->
+    <div class="index__wrapper py-4" id="artist-list"  style="margin: 0;">
+        <h3 class="font-weight-small text-center my-4 font-style-header" ><b>Our Local Artists</b></h3>
+        <div class="row__wrapper">
+            <div class="col-1 desktop-only"></div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-prev col-md-2" href="#artistcarousel" role="button" data-slide="prev">
+                    <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </div>
+            <div class="container-fluid col-special" >
+                <a class="carousel-control-prev mobile-only" href="#artistcarousel" role="button" data-slide="prev" style="padding:0px;width:10%;z-index:4;">
+                    <i class="fa fa-chevron-left fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;" ></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <div id="artistcarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        {% for artist in artists %}
+                         {% if forloop.first %}
+                        <div class="custom-carousel-item carousel-item col-md-3 active" style="z-index:1;">
+                            <a href="{% url 'detail_with_slug' slug=artist.slug %}" style="text-decoration: none;">
+                             <img class="img-fluid2 mx-auto d-block rounded-circle" src="{{artist.profile_picture.url}}"
+                                alt="slide 1">
+                            <p class="h5 text-center">{{ artist.fullname }}</p>
+                            </a>
+                        </div>
+                        {% else %}
+                          <div class="custom-carousel-item carousel-item col-md-3"  style="z-index:1;">
+                            <a href="{% url 'detail_with_slug' slug=artist.slug %}" style="text-decoration: none;">
+                            <img class="img-fluid2 mx-auto d-block rounded-circle" src="{{artist.profile_picture.url}}"
+                                alt="slide 1">
+                            <p class="h5 text-center">{{ artist.fullname }}</p>
+                            </a>
+                          </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+             <a class="carousel-control-next text-faded mobile-only" href="#artistcarousel" role="button"
+                    data-slide="next" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-right fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;"></i>
+                    <span class="sr-only">Next</span>
+                  </a>
+            </div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-next text-faded col-md-2" href="#artistcarousel" role="button"
+                    data-slide="next">
+                    <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        <div class="col-1 desktop-only"></div>
+        </div>
+    </div>
+
+    <!-- experience listing -->
+    <div class="index__wrapper" id="experience-list" style="margin: 0;">
+        <div style="margin-left:10%;">
+            <h3 class="font-weight-small text-left py-4 font-style-header" ><b>100+ Unique Authentic Experiences</b></h3>
+        </div>
+        <div class="row__wrapper">
+            <div class="col-1 desktop-only"></div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-prev col-md-2" href="#explistingcarousel" role="button" data-slide="prev">
+                    <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </div>
+
+            <div class="col-special">
+            <a class="carousel-control-prev mobile-only" href="#explistingcarousel" role="button" data-slide="prev" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-left fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;" ></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <div id="explistingcarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner row w-100-2 mx-auto" role="listbox">
+                        {% for artist in artists %}
+                            {% if forloop.first %}
+                        <div class="custom-carousel-item custom-carousel-item-font carousel-item col-md-4 active">
+                            <!-- card item1 -->
+                            <div class="card card-borderless mb-4 shadow-sm" >
+                                <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                <div class="d-block "><img class="img-fluid fit-image"
+                                        src="{{ artist.cover_picture1.url }}" alt="slide 8">
+                                </div>
+                                </a>
+                                <div class="card-body font-card">
+                                    <h5>{{ artist.exp_name }}</h5>
+                                    <p class="card-text">{{ artist.description|truncatechars:150  }}
+                                        <a href="{% url 'detail_with_slug' slug=artist.slug %}"><i>Read more</i></a></p>
+                                    <div>
+                                        <div class=" text-bold"><span class="icon-locate text-info"></span>{{ artist.location }}</div>
+                                        <div class=" text-bold"><span class="icon-clock text-info"></span>{{ artist.hour }} Hours</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center desktop-only">
+                                        <div class="text-warning">
+                                            <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+
+                                        </div>
+                                        <div class="btn-group">
+                                            <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary" >View
+                                                Experience</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="mobile-only">
+                                        <div class="text-warning">
+                                            <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+
+                                        </div>
+                                        <div class="btn-group mt-2">
+                                            <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary" style="font-size: 80%;">View
+                                                Experience</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+                            {% else %}
+                        <div class="custom-carousel-item custom-carousel-item-font carousel-item col-md-4">
+                            <!-- card item2 -->
+                            <div class="card card-borderless mb-4 shadow-sm">
+                                 <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                <div class="d-block "><img class="img-fluid fit-image"
+                                        src="{{ artist.cover_picture1.url }}" alt="slide 8"></div>
+                                 </a>
+                                <div class="card-body font-card">
+                                    <h5>{{ artist.exp_name }}</h5>
+                                    <p class="card-text">{{ artist.description|truncatechars:150  }}
+                                        <a href="{% url 'detail_with_slug' slug=artist.slug %}"><i>Read more</i></a></p>
+                                    <div>
+                                        <div class="text-bold"><span class="icon-locate text-info"></span>{{ artist.location }}</div>
+                                        <div class=" text-bold"><span class="icon-clock text-info"></span>{{ artist.hour }} Hours</div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center desktop-only">
+                                        <div class="text-warning">
+                                            <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+
+                                        </div>
+                                        <div class="btn-group">
+                                             <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                            <button type="button" class="btn btn-sm btn-outline-primary">View
+                                                Experience</button>
+                                             </a>
+                                        </div>
+                                    </div>
+                                    <div class="mobile-only">
+                                        <div class="text-warning">
+                                            <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= artist.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+
+                                        </div>
+                                        <div class="btn-group mt-2">
+                                            <a href="{% url 'detail_with_slug' slug=artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary" style="font-size: 80%;">View
+                                                Experience</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card -->
+                        </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        </div>
+                    </div>
+                     <a class="carousel-control-next text-faded mobile-only" href="#explistingcarousel" role="button"
+                    data-slide="next" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-right fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+                </div>
+
+                <div class="col-1 desktop-only">
+                <a class="carousel-control-next text-faded col-md-2" href="#explistingcarousel" role="button"
+                    data-slide="next" >
+                    <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        <div class="col-1 desktop-only"></div>
+            </div>
+    </div>
+
+
+    <!-- traveller review -->
+    <div class="index__wrapper">
+        <div style="margin-left:10%;">
+            <h3 class="font-weight-small text-left my-4 font-style-header" ><b>Traveller Reviews</b></h3>
+        </div>
+        <div class="row__wrapper">
+            <div class="col-1 desktop-only"></div>
+            <div class="col-1 desktop-only">
+                 <a class="carousel-control-prev col-md-2" href="#travellerreview" role="button" data-slide="prev">
+                            <i class="fa fa-chevron-left fa-lg text-muted"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+            </div>
+            <div class="col-special" >
+            <a class="carousel-control-prev mobile-only" href="#travellerreview" role="button" data-slide="prev" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-left fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;" ></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <div id="travellerreview" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner row w-100-2 mx-auto" role="listbox">
+                        {% for review in reviews %}
+                            {% if forloop.first %}
+                        <div class="custom-carousel-item carousel-item col-md-4 active">
+                            <!-- card item1 -->
+                            <div class="card mb-4 shadow-sm" >
+                                <div class="card-body ">
+                                    <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center"
+                                                src="{{ review.image.url }}" alt="slide 8">
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class="text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class="text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content|truncatechars:150 }}
+                                        <a href="index.html" onclick="display({{ review.pk }});return false;"><i>Read more</i></a></p>
+
+                                <div id="{{ review.pk }}"  class="justify-content-center review_popup" onclick="display({{ review.pk }})" style="display: none;">
+                                         <div class="card mb-4 shadow-sm card_popup">
+                                <div class="card-body" >
+                                        <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center float-right card_popup_img"
+                                                src="{{ review.image.url }}" alt="slide 8">
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class=" text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class=" text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content }}</p>
+                                    <a href="{% url 'detail_with_slug' slug=review.artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary float-right" >View
+                                                Experience</button>
+                                            </a>
+
+                                </div></div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!-- end card -->
+                        </div>
+                            {% else %}
+                        <div class="custom-carousel-item carousel-item col-md-4">
+                            <!-- card item1 -->
+                            <div class="card mb-4 shadow-sm"  >
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center"
+                                                src="{{ review.image.url }}" alt="slide 8">
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class="text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class="text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content|truncatechars:150 }}
+                                        <a href="index.html" onclick="display({{ review.pk }});return false;"><i>Read more</i></a></p>
+
+
+                                    <div id="{{ review.pk }}"  class="justify-content-center review_popup" onclick="display({{ review.pk }})" style="display: none;">
+                                         <div class="card mb-4 shadow-sm card_popup">
+                                <div class="card-body" >
+                                        <div class="row mb-3">
+                                        <div class="col-5 align-self-center">
+                                            <img class="fit-image rounded-circle text-center float-right card_popup_img"
+                                                src="{{ review.image.url }}" alt="slide 8">
+                                        </div>
+                                        <div class="col-7 text-left align-self-center">
+                                            <div class="text-bold">{{ review.reviewer_name }}</div>
+                                            <div class=" text-small"><span class="icon-locate text-info"></span>{{ review.location }}</div>
+                                            <div class=" text-small"><span class="icon-heart text-danger"></span>{{ review.artist.fullname }}</div>
+                                            <div class="text-small">{{ review.artist.exp_name }}</div>
+                                            <div class="text-warning">
+                                                 <!-- loop star rating -->
+                                                {% with ''|center:5 as range %}
+                                                    {% for i in range %}
+                                                        {% if forloop.counter <= review.star %}
+                                                             <i class="fa fa-star"></i>
+                                                        {% else %}
+                                                             <i class="fa fa-star-empty"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-small">{{ review.content }}</p>
+                                    <a href="{% url 'detail_with_slug' slug=review.artist.slug %}">
+                                                <button type="button" class="btn btn-sm btn-outline-primary float-right" >View
+                                                Experience</button>
+                                            </a>
+
+                                </div></div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!-- end card -->
+                        </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+           <a class="carousel-control-next text-faded mobile-only" href="#travellerreview" role="button"
+                    data-slide="next" style="padding:0px;width:10%;">
+                    <i class="fa fa-chevron-right fa-lg text-muted" style="padding:10px;border:1px solid black;border-radius: 25px;background-color: black;"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="col-1 desktop-only">
+                <a class="carousel-control-next text-faded col-md-2" href="#travellerreview" role="button"
+                            data-slide="next">
+                            <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+            </div>
+            <div class="col-1 desktop-only"></div>
+        </div>
+    </div>
+
+
+
+
+     <div  style="background: linear-gradient(90deg,#0F2027,#203A43,#2C5364);">
+    <!-- how it work -->
+    <div class="banner base" id="howitwork" style="background: linear-gradient(90deg,#0F2027,#203A43,#2C5364);">
+    <div class="container">
+        <div class="main-title">
+            <div id="howworktitle" class="col-sm-12">
+                <h2 style="font-family: Helvetica">How does it work?</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="steps" >
+                <div class="nowidth col-smt-3 step-module first">
+                    <div class="index"><span>
+                        <img class="manImg howtoimg" style="z-index:2;" src="/static/assets/img/about_us/booking.png"></img>
+                    </span></div>
+                    <h4 >Booking Online</h4>
+                    <p id="index0">Go to haystome.com then Explore various Authentic Art Experiences and Choose to Experience with Us</p>
+                </div>
+                <div class="nowidth col-smt-3 step-module">
+                    <div class="index"><span>
+                        <img class="manImg howtoimg" src="/static/assets/img/about_us/transport.png"></img>
+                    </span></div>
+                    <h4> Transportation</h4>
+                    <p id="index0">Our Friendly Haystome's facilitators will go personally to pick you up at your appointed location</p>
+                </div>
+                <div class="nowidth col-smt-3 step-module">
+                    <div class="index"><span>
+                        <img class="manImg howtoimg" src="/static/assets/img/about_us/experience.png"></img>
+                    </span></div>
+                    <h4 >Authentic Experience</h4>
+                    <p id="index0">Experience and Understand Cambodia Culture through Art Experience directly with Local Artist</p>
+
+                </div>
+                <div class="nowidth col-smt-3 step-module last">
+                    <div class="index"><span>
+                        <img class="manImg howtoimg" src="/static/assets/img/about_us/souvenir.png"></img>
+                    </span></div>
+                    <h4 >Self-made Souvenir</h4>
+                    <p  id="index0">At the end of your experience, you will obtain your own Self-made Souvenir to Reminiscent this Memorable Experience with Us</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+     </div>
+    <!--<div class="index__wrapper text-center">
+        <div style="margin-left:10%;">
+            <h3 class="font-weight-small text-left mt-4 font-style-header" ><b>How it works?</b></h3>
+        </div>
+        <div class="row_mission2">
+            <div class="col-11 padding-res">
+                <div id="howitwork" class="carousel slide" data-ride="carousel" data-interval="5000">
+                    <div class="carousel-inner row carousel-row w-100 mx-auto" role="listbox">
+                        <div class="custom-carousel-item carousel-item col-md-12 active" style="padding:0px;">
+
+                            <div class="card mb-4 card-borderless">
+                                <div class="card-body p-0">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-8 text-left">
+                                            <h5 class="font-style-header2" >1. Booking Online</h5>
+                                            <p class="font-style-p-color" >Go to our Website Then Explore various Authentic Art Experiences and Choose to Experience With Us</p>
+                                        </div>
+                                        <div class="col-sm-4 align-self-center">
+                                            <img class="fit-image rounded text-center"
+                                                src="{% static "assets/img/logo/haystome_vector.png" %}" alt="image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="custom-carousel-item carousel-item col-md-12" style="padding:0px;">
+
+                            <div class="card mb-4 card-borderless">
+                                <div class="card-body p-0">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-8 text-left">
+                                            <h5 class="font-style-header2" >2. Transportation</h5>
+                                            <p class="font-style-p-color" >Our Friendly Haystome's facilitators will go personally to pick you up at your appointed location</p>
+                                        </div>
+                                        <div class="col-sm-4 align-self-center">
+                                            <img class="fit-image rounded text-center"
+                                                src="{% static "assets/img/featured/meetup.jpg" %}" alt="image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="custom-carousel-item carousel-item col-md-12" style="padding:0px;">
+
+                            <div class="card mb-4 card-borderless">
+                                <div class="card-body p-0" >
+                                    <div class="row mb-3">
+                                        <div class="col-sm-8 text-left">
+                                            <h5 class="font-style-header2" >3.Experience the Authentic Art</h5>
+                                            <p class="font-style-p-color" >Experience and Understand Cambodia Culture through Art Experience directly with Local Artist</p>
+                                        </div>
+                                        <div class="col-sm-4 align-self-center">
+                                            <img class="fit-image rounded text-center"
+                                                src="{% static "assets/img/featured/accompany.jpg" %}" alt="image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="custom-carousel-item carousel-item col-md-12" style="padding:0px;">
+
+                            <div class="card mb-4 card-borderless">
+                                <div class="card-body p-0">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-8 text-left">
+                                            <h5 class="font-style-header2" >4.Get Self-made Souvenir</h5>
+                                            <p class="font-style-p-color">You will obtain your own Self-made Souvenir to reminiscent this Memorable Experience with Us</p>
+                                        </div>
+                                        <div class="col-sm-4 align-self-center">
+                                            <img class="fit-image rounded text-center"
+                                                src="{% static "assets/img/featured/souvenir.jpg" %}" alt="image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1">
+                <a class="carousel-control-next text-faded col-md-2" href="#howitwork" role="button" data-slide="next">
+                    <i class="fa fa-chevron-right fa-lg text-muted"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- why haystome -->
+    <div class="index__wrapper mt-5">
+            <div style="margin-left:10%;">
+            <h3 class="font-weight-small text-left font-style-header" ><b>What is Haystome?</b></h3>
+        </div>
+        <div class="row_mission2">
+            <div class="col-11 padding-res">
+                <!-- start card -->
+                <div class="card mb-4 card-borderless">
+                    <div class="card-body p-0">
+                        <div class="row mb-3">
+                            <div class="col-sm-8 text-left">
+                                <!--<h5 class="text-bold">Create unique memories together</h5> -->
+                                <p class="font-style-p">Haystome is a digital platform that aim to create impact to the travelers and artists in Cambodia. Haystome connects the travelers and artists to experience various authentic art experiences in Cambodia with convenient booking process and friendly facilitators to facilitate your travelling.</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <img class="fit-image rounded text-center" src="{% static "assets/img/logo/haystome_vector.png" %}"
+                                    alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+            </div>
+        </div>
+
+
+    <!-- supporter -->
+    <div class="index__footer">
+        <h3 class="font-weight-small text-center my-4 font-style-header" ><b>Our Supporter</b></h3>
+        <div class="row mx-5 d-flex justify-content-center">
+            <div class="col-md-3 align-self-center my-4">
+                <img class="img-fluid mx-auto d-block" src="{% static "assets/img/logo/impacthubpp.png" %}" alt="slide 1">
+            </div>
+            <div class="col-md-3 align-self-center my-4">
+                <img class="img-fluid mx-auto d-block" src="{% static "assets/img/logo/smartstart.png" %}" alt="slide 2">
+            </div>
+        </div>
+
+    </div>
+    </div>
+     <script>
+         function display(pk){
+             var off=document.getElementById(pk);
+             if (off.style.display == "none") {
+                 off.style.display = "block";
+             } else {
+                 off.style.display = "none";
+             }
+         }
+     </script>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d1887b822d70e36c2a37016/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+{% endblock %}

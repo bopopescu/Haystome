@@ -1,0 +1,273 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> Blog - Haystome </title>
+    <meta name="description" content="Read about the breathtaking and unforgettable experiential travelling in Cambodia."/>
+    <link rel="canonical" href="http://haystome.com/booking/blog/" />
+    <meta property="og:url" content="http://haystome.com/booking/blog/">
+    <meta property="og:image" content="{% static "assets/img/logo/favicon.png" %}">
+    <meta property="og:title" content=" Blog - Haystome">
+    <meta property="og:description" content="Read about the breathtaking and unforgettable experiential travelling in Cambodia.">
+     <meta name="keywords" content="book authentic art experience in Cambodia, art experience Cambodia, art experience Siem Reap, art experience Phnom Penh, travel Cambodia, Cambodia art,Cambodian artist,Cambodia Sculpture,Cambodia Dancing,Cambodia art,Cambodia artist">
+    <meta name="robots" content="index,follow">
+{% endblock %}
+
+{% block body %}
+    <section class="page-img header-list-img"
+             style="background:#4CAF50;">
+        <div class="container header-info list-header-info">
+            <div class="row">
+                <div class="col-sm-8 custom_margin">
+                    <h1 class="main-head">Blog</h1>
+                    <p class="sub-head">Get updated with Haystome blog</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-sm-8">
+                    {% for blogProfile in blogProfiles %}
+                        <article class="post-list full-img">
+                            <div class="post-img" style="background-image: url({{ blogProfile.image.url }})">
+                                <div class="item-overlay">
+                                    <a href="{% url 'blogdetail_with_slug' slug=blogProfile.slug %}"><span
+                                            class="icon-binocular"></span></a>
+                                </div>
+                            </div>
+                            <div class="post-summary">
+                                <header>
+                                    <h4 class="post-title">
+                                        <a href="{% url 'blogdetail_with_slug' slug=blogProfile.slug %}">{{ blogProfile.name }}</a>
+                                    </h4>
+                                    <p class="byline author vcard">
+                                        <span class="italic">By</span>&nbsp;
+                                        <a href="#" rel="author">{{ blogProfile.creator_name }}</a>
+                                        <span class="dot">·</span>
+                                        <span class="updated">{{ blogProfile.created_date }}</span>
+                                        <!--<span class="dot">·</span>
+                                        <span class="comments"><i class="fa fa-comment"></i>
+                                            <a href="#">1 Comment</a>
+                                        </span> -->
+                                    </p>
+                                </header>
+                                <div class="post-excerpt">
+                                    {{ blogProfile.description}}
+                                </div>
+
+                                <a href="{% url 'blogdetail_with_slug' slug=blogProfile.slug %}"
+                                   class="btn btn-primary hvr-sweep-to-right">Read More</a>
+                            </div>
+                        </article>
+                    {% endfor %}
+
+                    <!--<article class="post-list full-img">
+                        <div class="post-img" style="background-image: url('/static/assets/img/blog/2.jpg')">
+                            <div class="item-overlay">
+                                <a href="#"><span class="icon-binocular"></span></a>
+                            </div>
+                        </div>
+                        <div class="post-summary">
+                            <header>
+                                <h4 class="post-title">
+                                    <a href="#">Like Nothing I’ve Seen</a>
+                                </h4>
+                                <p class="byline author vcard">
+                                    <span class="italic">By</span>&nbsp;
+                                    <a href="#" rel="author">Keira Hopman</a>
+                                    <span class="dot">·</span>
+                                    <span class="updated">September 1, 2016</span>
+                                    <span class="dot">·</span>
+                                    <span class="comments"><i class="fa fa-comment"></i>
+                                        <a href="#">1 Comment</a>
+                                    </span>
+                                </p>
+                            </header>
+                            <div class="post-excerpt">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione cupiditate, expedita maxime voluptate iste eius fuga amet voluptas, unde exercitationem itaque praesentium velit facilis totam?
+                            </div>
+                            <a href="blog_single_center.html" class="btn btn-primary hvr-sweep-to-right">Read More</a>
+                        </div>
+                    </article>
+
+                    <article class="post-list full-img">
+                        <div class="post-img" style="background-image: url('/static/assets/img/blog/3.jpg')">
+                            <div class="item-overlay">
+                                <a href="#"><span class="icon-binocular"></span></a>
+                            </div>
+                        </div>
+                        <div class="post-summary">
+                            <header>
+                                <h4 class="post-title">
+                                    <a href="#">Every Corner has a Story </a>
+                                </h4>
+                                <p class="byline author vcard">
+                                    <span class="italic">By</span>&nbsp;
+                                    <a href="#" rel="author">Levi Pottinger</a>
+                                    <span class="dot">·</span>
+                                    <span class="updated">October 10, 2016</span>
+                                    <span class="dot">·</span>
+                                    <span class="comments"><i class="fa fa-comment"></i>
+                                        <a href="#">1 Comment</a>
+                                    </span>
+                                </p>
+                            </header>
+                            <div class="post-excerpt">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum molestias, delectus atque animi error, quos alias neque maxime adipisci architecto totam qui consectetur. Accusamus, minima.
+                            </div>
+                            <a href="blog_single_center.html" class="btn btn-primary hvr-sweep-to-right">Read More</a>
+                        </div>
+                    </article>
+
+                    <article class="post-list full-img">
+                        <div class="post-img" style="background-image: url('/static/assets/img/blog/4.jpg')">
+                            <div class="item-overlay">
+                                <a href="#"><span class="icon-binocular"></span></a>
+                            </div>
+                        </div>
+                        <div class="post-summary">
+                            <header>
+                                <h4 class="post-title">
+                                    <a href="#">No Particular Place to Go</a>
+                                </h4>
+                                <p class="byline author vcard">
+                                    <span class="italic">By</span>&nbsp;
+                                    <a href="#" rel="author">Susan N. Lynch</a>
+                                    <span class="dot">·</span>
+                                    <span class="updated">October 27, 2016</span>
+                                    <span class="dot">·</span>
+                                    <span class="comments"><i class="fa fa-comment"></i>
+                                        <a href="#">1 Comment</a>
+                                    </span>
+                                </p>
+                            </header>
+                            <div class="post-excerpt">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi rerum, saepe consectetur doloremque ipsa hic vel, voluptatem ipsum iusto, cumque possimus! At cupiditate, sint aperiam.
+                            </div>
+                            <a href="blog_single_center.html" class="btn btn-primary hvr-sweep-to-right">Read More</a>
+                        </div>
+                    </article>
+
+                    <article class="post-list full-img">
+                        <div class="post-img" style="background-image: url('/static/assets/img/blog/5.jpg')">
+                            <div class="item-overlay">
+                                <a href="#"><span class="icon-binocular"></span></a>
+                            </div>
+                        </div>
+                        <div class="post-summary">
+                            <header>
+                                <h4 class="post-title">
+                                    <a href="#">Showering in the Ocean</a>
+                                </h4>
+                                <p class="byline author vcard">
+                                    <span class="italic">By</span>&nbsp;
+                                    <a href="#" rel="author">James B. Camacho</a>
+                                    <span class="dot">·</span>
+                                    <span class="updated">December 13, 2016</span>
+                                    <span class="dot">·</span>
+                                    <span class="comments"><i class="fa fa-comment"></i>
+                                        <a href="#">1 Comment</a>
+                                    </span>
+                                </p>
+                            </header>
+                            <div class="post-excerpt">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit beatae commodi quis porro, quia eaque modi dicta praesentium consectetur ullam minima eveniet fugiat. Eveniet, vitae.
+                            </div>
+                            <a href="blog_single_center.html" class="btn btn-primary hvr-sweep-to-right">Read More</a>
+                        </div>
+                    </article> -->
+
+                    <div class="pagination-wrap">
+                        <a href="" class="blogfooter">See More</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="sidebar">
+                        {#                            <div class="border-box">#}
+                        {#                                <div class="box-title">Experience Search</div>#}
+                        {#                                <div class="input-group">#}
+                        {#                                    <input type="text" class="form-control footer-input-sub" placeholder="Search Site">#}
+                        {#                                    <div class="input-group-btn">#}
+                        {#                                        <button class="btn btn-primary footer-sub-button">Search</button>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+
+                        <div class="border-box">
+                            <div class="box-title">Recent Blog Post</div>
+                            <div class="recent-post-list">
+                                {% for blogProfile in recentBlogProfiles %}
+                                    <div class="recent-post">
+                                        <a href="{% url 'blogdetail_with_slug' slug=blogProfile.slug %}">
+                                            <div class="author-img"><img src="{{ blogProfile.image.url }}"
+                                                                         class="media-object" alt=""></div>
+                                        </a>
+                                        <div class="post-summary">
+                                            <a href="{% url 'blogdetail_with_slug' slug=blogProfile.slug %}">
+                                                <p>{{ blogProfile.name }}</p>
+                                            </a>
+                                            <div class="byline">
+                                                <span class="updated">{{ blogProfile.created_date }}</span>
+                                                <span class="dot">·</span>
+                                                <span class="italic">By</span>&nbsp;
+                                                <a href="#" rel="author" class="fn">{{ blogProfile.creator_name }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <!--<div class="recent-post">
+                                    <div class="author-img"><img src="/static/assets/img/team/2-sm.jpg" class="media-object" alt=""></div>
+                                    <div class="post-summary">
+                                        <p>Lorem ipsum dolor sit amet, cons adipisicing elit.</p>
+                                        <div class="byline">
+                                            <span class="updated">Jan 24, 2015</span>
+                                            <span class="dot">·</span>
+                                            <span class="italic">By</span>&nbsp;
+                                            <a href="#" rel="author" class="fn">Keira Hopman</a>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+
+                        {##}
+                        {#	<div class="border-box">#}
+                        {#		<div class="box-title">Categories</div>#}
+                        {#		<ul class="list">#}
+                        {#			<li class="cat-item"><a href="#">Creative (2)</a></li>#}
+                        {#			<li class="cat-item"><a href="#">Design (9)</a></li>#}
+                        {#			<li class="cat-item"><a href="#">Image (2)</a></li>#}
+                        {#			<li class="cat-item"><a href="#">Photography (9)</a></li>#}
+                        {#			<li class="cat-item"><a href="#">Videos (4)</a></li>#}
+                        {#			<li class="cat-item"><a href="#">WordPress (4)</a></li>#}
+                        {#		</ul>#}
+                        {#	</div>#}
+
+                        {#	<div class="border-box">#}
+                        {#		<div class="box-title">Tags</div>#}
+                        {#		<div class="tagcloud">#}
+                        {#			<a href="#" class="tag-link" title="2 topics">artwork</a>#}
+                        {#			<a href="#" class="tag-link" title="2 topics">Photo</a>#}
+                        {#			<a href="#" class="tag-link" title="3 topics">Video</a>#}
+                        {#			<a href="#" class="tag-link" title="1 topic">Videos</a></div>#}
+                        {#		</div>#}
+                        {#	</div>#}
+                    </div>
+                </div>
+            </div>
+    </main>
+    <script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d1887b822d70e36c2a37016/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+{% endblock %}

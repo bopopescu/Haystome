@@ -1,0 +1,112 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title> About Us - Haystome </title>
+    <meta name="description" content="We aim to support Cambodian artists by providing travelers a convenient, secure, and swift booking service for authentic art experience in Cambodia."/>
+    <link rel="canonical" href="http://www.haystome.com/booking/about_us/" />
+    <meta property="og:url" content="https://www.haystome.com/booking/about_us/">
+    <meta property="og:title" content=" About Us - Haystome ">
+    <meta property="og:image" content="{% static "assets/img/logo/favicon.png" %}">
+    <meta property="og:description" content="We aim to support Cambodian artists by providing travelers a convenient, secure, and swift booking service for authentic art experience in Cambodia.">
+     <meta name="keywords" content="book authentic art experience in Cambodia, art experience Cambodia, art experience Siem Reap, art experience Phnom Penh, travel Cambodia, Cambodia art,Cambodian artist,Cambodia Sculpture,Cambodia Dancing,Cambodia art,Cambodia artist">
+    <meta name="robots" content="index,nofollow">
+{% endblock %}
+
+{% block body %}
+    <div class="col position-relative mh-850 overflow-hidden text-center bg"
+         style="background-image: url('/static/assets/img/background/home-bg.jpg');">
+        <!-- header text -->
+        <div class="row col-sm-5 p-lg-5 mx-auto myt-11 my-2 textbg justify-content-center">
+            <img src="/static/assets/img/logo/haystome-white.svg" style="width:50%;height:20%;margin-bottom:10px;">
+            <h1 class="display-5 font-weight-normal text-white" style="font-size:3em;">Authentic Art Experience In Cambodia</h1>
+            <p class="lead font-weight-small text-white">The Best Digital Platform to provide Booking Services for
+                various
+                Authentic Art Experiences in Cambodia</p>
+            <a href="#howitwork" class="btn btn-primary btn-lg hvr-sweep-to-right" id="aboutus" style="border:none;"><div class="icon-arr-down"></div></a>
+            <!-- search bar -->
+            <!-- <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Where are you going?">
+                <div class="input-group-append">
+                    <button class="btn prime-btn my-sm-0 input-group-text" type="submit">Search</button>
+                </div>
+            </div> -->
+            <!-- Split dropup button -->
+        </div>
+    </div>
+    </div>
+    <div class="banner base" id="howitwork" style="background-image: linear-gradient(#000, #111); ">
+        <div class="container">
+            <div class="main-title">
+                <div id="howworktitle" class="col-sm-12">
+                    <h2 style="font-family: Helvetica">How does it work?</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="steps" >
+                    <div class="nowidth col-smt-3 step-module first">
+                        <div class="index"><span>
+                        <img class="manImg howtoimg" style="z-index:2;" src="/static/assets/img/about_us/booking.png"></img>
+                    </span></div>
+                        <h4 style="background-color: #000;">Booking Online</h4>
+                        <p >Go to haystome.com then Explore various Authentic Art Experiences and Choose to Experience with Us</p>
+                    </div>
+                    <div class="nowidth col-smt-3 step-module">
+                        <div class="index"><span>
+                        <img class="manImg howtoimg" src="/static/assets/img/about_us/transport.png"></img>
+                    </span></div>
+                        <h4 style="background-color: #000;">Transportation</h4>
+                        <p>Our Friendly Haystome's facilitators will go personally to pick you up at your appointed location</p>
+                    </div>
+                    <div class="nowidth col-smt-3 step-module">
+                        <div class="index"><span>
+                        <img class="manImg howtoimg" src="/static/assets/img/about_us/experience.png"></img>
+                    </span></div>
+                        <h4 style="background-color: #111;">Authentic Experience</h4>
+                        <p style="background-color: #111;">Experience and Understand Cambodia Culture through Art Experience directly with Local Artist</p>
+
+                    </div>
+                    <div class="nowidth col-smt-3 step-module last">
+                        <div class="index"><span>
+                        <img class="manImg howtoimg" src="/static/assets/img/about_us/souvenir.png"></img>
+                    </span></div>
+                        <h4 style="background-color: #111;">Self-made Souvenir</h4>
+                        <p style="background-color: #111;">At the end of your experience, you will obtain your own Self-made Souvenir to Reminiscent this Memorable Experience with Us</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner base">
+        <div class="container">
+            <div class="line-box">
+                <div class="line-title">Mission</div>
+                <h2>New way of Authentic Travelling</h2>
+                <p>We are creating this platform to introduce new way of travelling by providing authentic art experiences and information of Local Artists and
+                    the most convenient way to book the experience online.</p>
+                <p>Haystome start with the aim of providing the alternative source of income for Cambodian artists who are
+                    facing financial struggles and support Cambodia Art and Culture by promoting people who spend their lifetime honed and practice arts in Cambodia through our platform.
+                    <br><br><b>We hope your time spending in Cambodia would become unforgettable through experience with our Local Artists!</b></p>
+                <br>
+                <a href="/booking" class="btn btn-primary btn-lg hvr-sweep-to-right font-style-header2">Experience Now</a>
+            </div>
+        </div>
+    </div>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5d1887b822d70e36c2a37016/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+{% endblock %}
